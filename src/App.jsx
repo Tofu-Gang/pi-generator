@@ -1,11 +1,6 @@
-import { Scale } from "tonal";
 import getPiNumbers from "./lib/fetchPI.js";
 
 function App() {
-    const key = "C";
-    const scale = "major";
-    console.log("PRDEL!!", Scale.scaleNotes(Scale.get(`${key} ${scale}`).notes));
-
     return (
         <>
             <h1>My App</h1>
