@@ -5,7 +5,7 @@ function App() {
         <>
             <h1>My App</h1>
             <button onClick={async () => {
-                console.log("FETCHED!", await getPiNumbers(999990, 7));
+                console.log("FETCHED!", await getPiNumbers(7, 10));
             }}>FETCH!</button>
         </>
     );
