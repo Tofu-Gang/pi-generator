@@ -1,15 +1,45 @@
 import { useState } from "react";
 import getPiNumbers from "./lib/fetchPI.js";
 import { getScaleNotes, KEYS } from "./lib/music.js";
-import { ScalesData } from "./lib/scalesData.js";
+import { ScalesData, TAGS } from "./lib/scalesData.js";
+import Checkbox from "./components/Checkbox.jsx";
 
 function App() {
     const [key, setKey] = useState(KEYS[0]);
     const [scale, setScale] = useState(ScalesData[0].name);
     const [notes, setNotes] = useState(getScaleNotes(key, scale));
+    const [filters, setFilters] = useState(Object.values(TAGS).map((name) =>
+        ({name, checked : false})));
+
+    function onChange(checkboxIndex) {
+        setFilters((current) =>
+            current.map((filter, index) =>
+                index === checkboxIndex ? {...filter, checked: !filter.checked} : {...filter}
+            )
+        );
+    }
 
     return (
         <>
+            <fieldset>
+                <legend>Filter scales:</legend>
+                <div>
+                    {filters.map((filter, index) =>
+                        <Checkbox
+                            key={filter.name}
+                            name={filter.name}
+                            checked={filter.checked}
+                            onChange={() => onChange(index)}
+                        />
+                    )}
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Values:</legend>
+                {filters.map((filter, index) => <span key={index}>{filter.checked ? "T " : "F "} {filter.name} | </span>)}
+            </fieldset>
+
             <label htmlFor="key-select">Choose a key:</label>
             <select id="key-select" onChange={(event) => {
                 const newKey = event.target.value

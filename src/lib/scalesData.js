@@ -1,8 +1,8 @@
 export const TAGS = {
     major: "major",
     minor: "minor",
-    nonWestern: "nonWestern",
-    greekModes: "greekModes",
+    nonWestern: "non-western",
+    greekModes: "greek modes",
     diminished: "diminished",
     augmented: "augmented",
     pentatonic: "pentatonic",
