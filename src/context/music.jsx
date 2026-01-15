@@ -8,7 +8,7 @@ export function MusicProvider({ children }) {
     const [key, setKey] = useState(Keys[0]);
     const [filters, setFilters] = useState(Object.values(Tags).map((name) => ({name, checked : false})));
     const [scales, setScales] = useState([]);
-    const [scale, setScale] = useState({});
+    const [scale, setScale] = useState(null);
     const [notes, setNotes] = useState([]);
     const [resultLength, setResultLength] = useState(ResultLengths[0]);
     const [resultNotes, setResultNotes] = useState([]);
@@ -28,8 +28,10 @@ export function MusicProvider({ children }) {
     }, [scales]);
 
     useEffect(() => {
-        setNotes(getScaleNotes(key, scale.name));
-    }, [key, scale]);
+        if(scales.length > 0) {
+            setNotes(getScaleNotes(key, scale.name));
+        }
+    }, [key, scale, scales]);
 
     return <MusicContext.Provider
         value={{
