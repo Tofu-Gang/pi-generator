@@ -32,16 +32,7 @@ function getRandomPiPosition(topBoundary) {
 function convertToBase(numbers, base) {
     let i = 0;
 
-    while(i < numbers.length - 1) {
-        // if base 12 (chromatic scale) is selected, look for 10 or 11 by joining two consecutive numbers
-        const composite = numbers[i] + numbers[i + 1];
-
-        if(composite[0] !== "0" && Number(composite) < base) {
-            // 10 or 11 found, replace one number with the 10 or 11 and remove the second number
-            numbers[i] = composite;
-            numbers.splice(i + 1, 1);
-        }
-
+    while(i < numbers.length) {
         // convert the number to a desired base; numbers with more digits are split to another array of single digits
         numbers[i] = Number(numbers[i]).toString(base).split("");
         i++;
@@ -60,7 +51,8 @@ export default async function getPiNumbers(base, numberOfDigits) {
     if(numberOfDigits > MAX_NUMBER_OF_DIGITS) {
         numberOfDigits = MAX_NUMBER_OF_DIGITS;
     }
+
     const start = getRandomPiPosition(numberOfDigits);
     const numbers = (await fetchPi(start, numberOfDigits)).split("");
-    return convertToBase(numbers, base);
+    return convertToBase(numbers, base).slice(-numberOfDigits);
 }

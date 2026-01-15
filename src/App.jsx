@@ -1,10 +1,10 @@
 import { useMusic } from "./context/music.jsx";
 import Checkbox from "./components/Checkbox.jsx";
-import { KEYS } from "./lib/music.js";
-import getPiNumbers from "./lib/fetchPI.js";
+import { getResultNotes } from "./lib/music.js";
+import { Keys, ResultLengths } from "./lib/musicData.js"
 
 function App() {
-    const {setKey, setScale, scales, notes, filters, setFilters} = useMusic();
+    const {setKey, filters, setFilters, scales, setScale, notes, resultLength, setResultLength, resultNotes, setResultNotes} = useMusic();
 
     function onChange(checkboxIndex) {
         setFilters((current) =>
@@ -30,18 +30,35 @@ function App() {
                 </div>
             </fieldset>
 
-            <fieldset>
-                <legend>Choose a key:</legend>
-                <select onChange={(event) => {
-                    const newKey = event.target.value
-                    setKey(newKey);
-                }}>
-                    {KEYS.map((key) => <option key={key} value={key}>{key}</option>)}
-                </select>
-            </fieldset>
-
             {scales.length > 0 && (
                 <>
+                    <fieldset>
+                        <legend>Choose a key:</legend>
+                        <select onChange={(event) => {
+                            const newKey = event.target.value
+                            setKey(newKey);
+                        }}>
+                            {Keys.map((key) => <option key={key} value={key}>{key}</option>)}
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Choose length:</legend>
+                        <select onChange={(event) => {
+                            setResultLength(ResultLengths.filter((resultLength) => resultLength.length === Number(event.target.value))[0])
+                        }}>
+                            {ResultLengths.map((resultLength) =>
+                                <option
+                                    key={resultLength.name}
+                                    value={resultLength.length}
+                                >
+                                    {resultLength.name}{resultLength?.length &&` (${resultLength.length})`}
+                                </option>
+                            )}
+                        </select>
+                        <h1>{resultLength?.length ? resultLength.length : "Custom"}</h1>
+                    </fieldset>
+
                     <fieldset>
                         <legend>Choose a scale:</legend>
                         <select onChange={(event) => {
@@ -57,13 +74,18 @@ function App() {
                         <legend>Notes:</legend>
                         <h1>{notes.join(", ")}</h1>
                     </fieldset>
+
+                    <fieldset>
+                        <legend>Get result:</legend>
+                        <button
+                            onClick={async () => setResultNotes(await getResultNotes(notes, resultLength))}
+                        >
+                            FETCH!
+                        </button>
+                        {resultNotes.length > 0 && <h1>{resultNotes.join(", ")}</h1>}
+                    </fieldset>
                 </>
             )}
-
-            <button onClick={async () => {
-                console.log("FETCHED!", await getPiNumbers(7, 50));
-            }}>FETCH!
-            </button>
         </>
     );
 }

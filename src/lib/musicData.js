@@ -1,462 +1,488 @@
-export const TAGS = {
-    major: "major",
-    minor: "minor",
-    nonWestern: "non-western",
-    greekModes: "greek modes",
-    diminished: "diminished",
-    augmented: "augmented",
-    pentatonic: "pentatonic",
-    hexatonic: "hexatonic",
-    heptatonic: "heptatonic",
-    octatonic: "octatonic",
-    nonatonic: "nonatonic",
-    decatonic: "decatonic"
+export const Keys = [
+    "C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B"
+];
+
+export const ResultLengths = [
+    {
+        name: "Bass Line Simple",
+        length: 8
+    },
+    {
+        name: "Bass Line Busy",
+        length: 32
+    },
+    {
+        name: "Guitar Lick/Riff",
+        length: 16
+    },
+    {
+        name: "Guitar Solo",
+        length: 64
+    },
+    {
+        name: "Custom",
+    },
+];
+
+export const Tags = {
+    major: "Major",
+    minor: "Minor",
+    nonWestern: "Non-western",
+    greekModes: "Greek Modes",
+    diminished: "Diminished",
+    augmented: "Augmented",
+    pentatonic: "Pentatonic (5 Notes)",
+    hexatonic: "Hexatonic (6 Notes)",
+    heptatonic: "Heptatonic (7 Notes)",
+    octatonic: "Octatonic (8 Notes)",
+    nonatonic: "Nonatonic (9 Notes)",
+    decatonic: "Decatonic (10 Notes)"
 }
 
-export const ScalesData = [
+export const Scales = [
     {
         name: "major pentatonic",
         display: "Major Pentatonic",
-        tags: [TAGS.major, TAGS.pentatonic]
+        tags: [Tags.major, Tags.pentatonic]
     },
     {
         name: "major",
         display: "Major",
-        tags: [TAGS.major, TAGS.heptatonic]
+        tags: [Tags.major, Tags.heptatonic]
     },
     {
         name: "minor",
         display: "Minor",
-        tags: [TAGS.minor, TAGS.heptatonic]
+        tags: [Tags.minor, Tags.heptatonic]
     },
     {
         name: "major blues",
         display: "Major Blues",
-        tags: [TAGS.major, TAGS.hexatonic]
+        tags: [Tags.major, Tags.hexatonic]
     },
     {
         name: "minor blues",
         display: "Minor Blues",
-        tags: [TAGS.minor, TAGS.hexatonic]
+        tags: [Tags.minor, Tags.hexatonic]
     },
     {
         name: "melodic minor",
         display: "Melodic Minor",
-        tags: [TAGS.minor, TAGS.heptatonic]
+        tags: [Tags.minor, Tags.heptatonic]
     },
     {
         name: "harmonic minor",
         display: "Harmonic Minor",
-        tags: [TAGS.minor, TAGS.heptatonic]
+        tags: [Tags.minor, Tags.heptatonic]
     },
     {
         name: "bebop",
         display: "Bebop",
-        tags: [TAGS.octatonic]
+        tags: [Tags.octatonic]
     },
     {
         name: "diminished",
         display: "Diminished",
-        tags: [TAGS.diminished, TAGS.octatonic]
+        tags: [Tags.diminished, Tags.octatonic]
     },
     {
         name: "ionian pentatonic",
         display: "Ionian Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "dorian",
         display: "Dorian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "dorian b2",
         display: "Dorian B2",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "dorian #4",
         display: "Dorian #4",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "phrygian",
         display: "Phrygian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "phrygian dominant",
         display: "Phrygian Dominant",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "lydian",
         display: "Lydian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "lydian pentatonic",
         display: "Lydian Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "lydian dominant pentatonic",
         display: "Lydian Dominant Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "double harmonic lydian",
         display: "Double Harmonic Lydian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "lydian dominant",
         display: "Lydian Dominant",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "lydian augmented",
         display: "Lydian Augmented",
-        tags: [TAGS.greekModes, TAGS.augmented, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.augmented, Tags.heptatonic]
     },
     {
         name: "lydian diminished",
         display: "Lydian Diminished",
-        tags: [TAGS.greekModes, TAGS.diminished, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.diminished, Tags.heptatonic]
     },
     {
         name: "lydian minor",
         display: "Lydian Minor",
-        tags: [TAGS.greekModes, TAGS.minor, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.minor, Tags.heptatonic]
     },
     {
         name: "lydian #9",
         display: "Lydian #9",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "mixolydian",
         display: "Mixolydian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "mixolydian pentatonic",
         display: "Mixolydian Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "mixolydian b6",
         display: "Mixolydian B6",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "locrian",
         display: "Locrian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "locrian pentatonic",
         display: "Locrian Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "super locrian pentatonic",
         display: "Super Locrian Pentatonic",
-        tags: [TAGS.greekModes, TAGS.pentatonic]
+        tags: [Tags.greekModes, Tags.pentatonic]
     },
     {
         name: "locrian major",
         display: "Locrian Major",
-        tags: [TAGS.greekModes, TAGS.major, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.major, Tags.heptatonic]
     },
     {
         name: "locrian #2",
         display: "Locrian #2",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "ultralocrian",
         display: "Ultralocrian",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "locrian 6",
         display: "Locrian 6",
-        tags: [TAGS.greekModes, TAGS.heptatonic]
+        tags: [Tags.greekModes, Tags.heptatonic]
     },
     {
         name: "bebop locrian",
         display: "Bebop Locrian",
-        tags: [TAGS.greekModes, TAGS.octatonic]
+        tags: [Tags.greekModes, Tags.octatonic]
     },
     {
         name: "ritusen",
         display: "Ritusen",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "egyptian",
         display: "Egyptian",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "neopolitan major pentatonic",
         display: "Neopolitan Major Pentatonic",
-        tags: [TAGS.nonWestern, TAGS.major, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.major, Tags.pentatonic]
     },
     {
         name: "vietnamese 1",
         display: "Vietnamese 1",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "pelog",
         display: "Pelog",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "kumoijoshi",
         display: "Kumoijoshi",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "hirajoshi",
         display: "Hirajoshi",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "iwato",
         display: "Iwato",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "in-sen",
         display: "In-sen",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "malkos raga",
         display: "Malkos Raga",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "minor pentatonic",
         display: "Minor Pentatonic",
-        tags: [TAGS.minor, TAGS.pentatonic]
+        tags: [Tags.minor, Tags.pentatonic]
     },
     {
         name: "minor six pentatonic",
         display: "Minor Six Pentatonic",
-        tags: [TAGS.minor, TAGS.pentatonic]
+        tags: [Tags.minor, Tags.pentatonic]
     },
     {
         name: "flat three pentatonic",
         display: "Flat Three Pentatonic",
-        tags: [TAGS.pentatonic]
+        tags: [Tags.pentatonic]
     },
     {
         name: "flat six pentatonic",
         display: "Flat Six Pentatonic",
-        tags: [TAGS.pentatonic]
+        tags: [Tags.pentatonic]
     },
     {
         name: "scriabin",
         display: "Scriabin",
-        tags: [TAGS.nonWestern, TAGS.pentatonic]
+        tags: [Tags.nonWestern, Tags.pentatonic]
     },
     {
         name: "whole tone pentatonic",
         display: "Whole Tone Pentatonic",
-        tags: [TAGS.pentatonic]
+        tags: [Tags.pentatonic]
     },
     {
         name: "minor hexatonic",
         display: "Minor Hexatonic",
-        tags: [TAGS.minor, TAGS.hexatonic]
+        tags: [Tags.minor, Tags.hexatonic]
     },
     {
         name: "augmented",
         display: "Augmented",
-        tags: [TAGS.augmented, TAGS.hexatonic]
+        tags: [Tags.augmented, Tags.hexatonic]
     },
     {
         name: "piongio",
         display: "Piongio",
-        tags: [TAGS.hexatonic]
+        tags: [Tags.hexatonic]
     },
     {
         name: "prometheus neopolitan",
         display: "Prometheus Neopolitan",
-        tags: [TAGS.hexatonic, TAGS.nonWestern]
+        tags: [Tags.hexatonic, Tags.nonWestern]
     },
     {
         name: "prometheus",
         display: "Prometheus",
-        tags: [TAGS.hexatonic, TAGS.nonWestern]
+        tags: [Tags.hexatonic, Tags.nonWestern]
     },
     {
         name: "mystery #1",
         display: "Mystery #1",
-        tags: [TAGS.hexatonic]
+        tags: [Tags.hexatonic]
     },
     {
         name: "six tone symmetric",
         display: "Six Tone Symmetric",
-        tags: [TAGS.hexatonic]
+        tags: [Tags.hexatonic]
     },
     {
         name: "whole tone",
         display: "Whole Tone",
-        tags: [TAGS.hexatonic]
+        tags: [Tags.hexatonic]
     },
     {
         name: "messiaen's mode #3",
         display: "Messiaen's Mode #3",
-        tags: [TAGS.nonatonic]
+        tags: [Tags.nonatonic]
     },
     {
         name: "messiaen's mode #4",
         display: "Messiaen's Mode #4",
-        tags: [TAGS.octatonic]
+        tags: [Tags.octatonic]
     },
     {
         name: "messiaen's mode #5",
         display: "Messiaen's Mode #5",
-        tags: [TAGS.hexatonic]
+        tags: [Tags.hexatonic]
     },
     {
         name: "messiaen's mode #6",
         display: "Messiaen's Mode #6",
-        tags: [TAGS.octatonic]
+        tags: [Tags.octatonic]
     },
     {
         name: "messiaen's mode #7",
         display: "Messiaen's Mode #7",
-        tags: [TAGS.decatonic]
+        tags: [Tags.decatonic]
     },
     {
         name: "altered",
         display: "Altered",
-        tags: [TAGS.heptatonic]
+        tags: [Tags.heptatonic]
     },
     {
         name: "augmented heptatonic",
         display: "Augmented Heptatonic",
-        tags: [TAGS.augmented, TAGS.heptatonic]
+        tags: [Tags.augmented, Tags.heptatonic]
     },
     {
         name: "leading whole tone",
         display: "Leading Whole Tone",
-        tags: [TAGS.major, TAGS.heptatonic]
+        tags: [Tags.major, Tags.heptatonic]
     },
     {
         name: "balinese",
         display: "Balinese",
-        tags: [TAGS.nonWestern, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.heptatonic]
     },
     {
         name: "neopolitan major",
         display: "Neopolitan Major",
-        tags: [TAGS.nonWestern, TAGS.major, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.major, Tags.heptatonic]
     },
     {
         name: "harmonic major",
         display: "Harmonic Major",
-        tags: [TAGS.major, TAGS.heptatonic]
+        tags: [Tags.major, Tags.heptatonic]
     },
     {
         name: "double harmonic major",
         display: "Double Harmonic Major",
-        tags: [TAGS.major, TAGS.heptatonic]
+        tags: [Tags.major, Tags.heptatonic]
     },
     {
         name: "hungarian minor",
         display: "Hungarian Minor",
-        tags: [TAGS.nonWestern, TAGS.minor, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.minor, Tags.heptatonic]
     },
     {
         name: "hungarian major",
         display: "Hungarian Major",
-        tags: [TAGS.nonWestern, TAGS.major, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.major, Tags.heptatonic]
     },
     {
         name: "oriental",
         display: "Oriental",
-        tags: [TAGS.nonWestern, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.heptatonic]
     },
     {
         name: "flamenco",
         display: "Flamenco",
-        tags: [TAGS.heptatonic]
+        tags: [Tags.heptatonic]
     },
     {
         name: "todi raga",
         display: "Todi Raga",
-        tags: [TAGS.nonWestern, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.heptatonic]
     },
     {
         name: "persian",
         display: "Persian",
-        tags: [TAGS.nonWestern, TAGS.heptatonic]
+        tags: [Tags.nonWestern, Tags.heptatonic]
     },
     {
         name: "enigmatic",
         display: "Enigmatic",
-        tags: [TAGS.heptatonic]
+        tags: [Tags.heptatonic]
     },
     {
         name: "major augmented",
         display: "Major Augmented",
-        tags: [TAGS.major, TAGS.augmented, TAGS.heptatonic]
+        tags: [Tags.major, Tags.augmented, Tags.heptatonic]
     },
     {
         name: "purvi raga",
         display: "Purvi Raga",
-        tags: [TAGS.nonWestern, TAGS.octatonic]
+        tags: [Tags.nonWestern, Tags.octatonic]
     },
     {
         name: "spanish heptatonic",
         display: "Spanish Heptatonic",
-        tags: [TAGS.nonWestern, TAGS.octatonic]
+        tags: [Tags.nonWestern, Tags.octatonic]
     },
     {
         name: "bebop minor",
         display: "Bebop Minor",
-        tags: [TAGS.minor, TAGS.octatonic]
+        tags: [Tags.minor, Tags.octatonic]
     },
     {
         name: "bebop major",
         display: "Bebop Major",
-        tags: [TAGS.major, TAGS.octatonic]
+        tags: [Tags.major, Tags.octatonic]
     },
     {
         name: "minor bebop",
         display: "Harmonic Minor Bebop",
-        tags: [TAGS.minor, TAGS.octatonic]
+        tags: [Tags.minor, Tags.octatonic]
     },
     {
         name: "ichikosucho",
         display: "Ichikosucho",
-        tags: [TAGS.nonWestern, TAGS.major, TAGS.octatonic]
+        tags: [Tags.nonWestern, Tags.major, Tags.octatonic]
     },
     {
         name: "minor six diminished",
         display: "Minor Six Diminished",
-        tags: [TAGS.minor, TAGS.diminished, TAGS.octatonic]
+        tags: [Tags.minor, Tags.diminished, Tags.octatonic]
     },
     {
         name: "half-whole diminished",
         display: "Half-whole Diminished",
-        tags: [TAGS.diminished, TAGS.octatonic]
+        tags: [Tags.diminished, Tags.octatonic]
     },
     {
         name: "kafi raga",
         display: "Kafi Raga",
-        tags: [TAGS.nonWestern, TAGS.octatonic]
+        tags: [Tags.nonWestern, Tags.octatonic]
     },
     {
         name: "composite blues",
         display: "Composite Blues",
-        tags: [TAGS.nonatonic]
+        tags: [Tags.nonatonic]
     }
 ]
