@@ -1,15 +1,11 @@
-import { useState } from "react";
 import getPiNumbers from "./lib/fetchPI.js";
 import { getScaleNotes, KEYS } from "./lib/music.js";
-import { ScalesData, TAGS } from "./lib/scalesData.js";
+import { ScalesData } from "./lib/scalesData.js";
 import Checkbox from "./components/Checkbox.jsx";
+import { useMusic } from "./context/music.jsx";
 
 function App() {
-    const [key, setKey] = useState(KEYS[0]);
-    const [scale, setScale] = useState(ScalesData[0].name);
-    const [notes, setNotes] = useState(getScaleNotes(key, scale));
-    const [filters, setFilters] = useState(Object.values(TAGS).map((name) =>
-        ({name, checked : false})));
+    const { key, setKey, scale, setScale, notes, setNotes, filters, setFilters } = useMusic();
 
     function onChange(checkboxIndex) {
         setFilters((current) =>
