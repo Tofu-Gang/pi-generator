@@ -1,11 +1,10 @@
-import getPiNumbers from "./lib/fetchPI.js";
-import { getScaleNotes, KEYS } from "./lib/music.js";
-import { ScalesData } from "./lib/scalesData.js";
-import Checkbox from "./components/Checkbox.jsx";
 import { useMusic } from "./context/music.jsx";
+import Checkbox from "./components/Checkbox.jsx";
+import { KEYS } from "./lib/music.js";
+import getPiNumbers from "./lib/fetchPI.js";
 
 function App() {
-    const { key, setKey, scale, setScale, notes, setNotes, filters, setFilters } = useMusic();
+    const {setKey, setScale, scales, notes, filters, setFilters} = useMusic();
 
     function onChange(checkboxIndex) {
         setFilters((current) =>
@@ -32,42 +31,39 @@ function App() {
             </fieldset>
 
             <fieldset>
-                <legend>Values:</legend>
-                {filters.map((filter, index) => <span key={index}>{filter.checked ? "T " : "F "} {filter.name} | </span>)}
+                <legend>Choose a key:</legend>
+                <select onChange={(event) => {
+                    const newKey = event.target.value
+                    setKey(newKey);
+                }}>
+                    {KEYS.map((key) => <option key={key} value={key}>{key}</option>)}
+                </select>
             </fieldset>
 
-            <label htmlFor="key-select">Choose a key:</label>
-            <select id="key-select" onChange={(event) => {
-                const newKey = event.target.value
-                setKey(newKey);
-                setNotes(getScaleNotes(newKey, scale));
-            }}>
-                {KEYS.map((key) => <option key={key} value={key}>{key}</option>)}
-            </select>
+            {scales.length > 0 && (
+                <>
+                    <fieldset>
+                        <legend>Choose a scale:</legend>
+                        <select onChange={(event) => {
+                            const newScale = event.target.value;
+                            setScale(scales.filter((scaleData) => scaleData.name === newScale)[0]);
+                        }}>
+                            {scales.map((scale) =>
+                                <option key={scale.name} value={scale.name}>{scale.display}</option>)}
+                        </select>
+                    </fieldset>
 
-            <label htmlFor="scale-select">Choose a scale:</label>
-            <select id="scale-select" onChange={(event) => {
-                const newScale = event.target.value;
-                setScale(newScale);
-                setNotes(getScaleNotes(key, newScale));
-            }}>
-                {ScalesData.map((scale) => <option key={scale.name} value={scale?.display || scale.name}>{scale?.display || scale.name}</option>)}
-            </select>
+                    <fieldset>
+                        <legend>Notes:</legend>
+                        <h1>{notes.join(", ")}</h1>
+                    </fieldset>
+                </>
+            )}
 
             <button onClick={async () => {
                 console.log("FETCHED!", await getPiNumbers(7, 50));
             }}>FETCH!
             </button>
-
-            <h1>Notes: {notes.join(", ")}</h1>
-
-            {ScalesData.map((scale) =>
-                <h1 key={scale.name}>
-                    ({getScaleNotes(key, scale.name).length})
-                    {scale?.display || scale.name}:
-                    {getScaleNotes(key, scale.name).join(", ")}
-                </h1>
-            )}
         </>
     );
 }
