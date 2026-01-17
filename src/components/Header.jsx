@@ -30,7 +30,7 @@ function Header() {
         <div style={{display: "flex", border: "4px solid red"}}>
             {location.pathname === "/" && <h3 style={{padding: "3px"}}>BREADCRUMBS:</h3>}
             {location.pathname !== "/" && <><h3 style={{padding: "3px"}}><Link to="/">Home</Link></h3><h3 style={{padding: "3px"}}>BREADCRUMBS:</h3></>}
-            {breadcrumbs.length > 0 && breadcrumbs.map((breadcrumb) =>
+            <div style={{display: "flex", flexWrap: "wrap"}}>{breadcrumbs.length > 0 && breadcrumbs.map((breadcrumb) =>
                 <h3
                     key={breadcrumb.name}
                     style={{
@@ -41,7 +41,7 @@ function Header() {
                 >
                     {breadcrumb.name}
                 </h3>
-            )}
+            )}</div>
         </div>
     );
 }
