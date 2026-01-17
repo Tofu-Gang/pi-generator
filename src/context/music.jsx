@@ -3,18 +3,24 @@ import { getScaleNotes, getScalesFiltered } from "../lib/music.js";
 import { Tags } from "../lib/musicData.js";
 
 const MusicContext = createContext();
-const Defaults = {
-
+export const Defaults = {
+    key: null,
+    filters: Object.values(Tags).map((name) => ({name, checked : false})),
+    scales: [],
+    scale: null,
+    notes: [],
+    resultLength: null,
+    resultNotes: []
 }
 
 export function MusicProvider({ children }) {
-    const [key, setKey] = useState(null);
-    const [filters, setFilters] = useState(Object.values(Tags).map((name) => ({name, checked : false})));
-    const [scales, setScales] = useState([]);
-    const [scale, setScale] = useState(null);
-    const [notes, setNotes] = useState([]);
-    const [resultLength, setResultLength] = useState(null);
-    const [resultNotes, setResultNotes] = useState([]);
+    const [key, setKey] = useState(Defaults.key);
+    const [filters, setFilters] = useState(Defaults.filters);
+    const [scales, setScales] = useState(Defaults.scales);
+    const [scale, setScale] = useState(Defaults.scale);
+    const [notes, setNotes] = useState(Defaults.notes);
+    const [resultLength, setResultLength] = useState(Defaults.resultLength);
+    const [resultNotes, setResultNotes] = useState(Defaults.resultNotes);
 
     useEffect(() => {
         setScales(getScalesFiltered(filters));
