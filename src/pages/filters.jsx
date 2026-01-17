@@ -14,23 +14,28 @@ function Filters() {
     }
 
     return (
-        <fieldset>
-            <legend>Filter scales:</legend>
-            <div>
-                {filters.map((filter, index) =>
-                    <Checkbox
-                        key={filter.name}
-                        name={filter.name}
-                        checked={filter.checked}
-                        onChange={() => onChange(index)}
-                    />
-                )}
-            </div>
+        <>
             <fieldset>
-                <legend>Next</legend>
-                <Link to="/scale">Choose Scale</Link>
+                <legend>Filter scales:</legend>
+                <div>
+                    {filters.map((filter, index) =>
+                        <Checkbox
+                            key={filter.name}
+                            name={filter.name}
+                            checked={filter.checked}
+                            onChange={() => onChange(index)}
+                        />
+                    )}
+                </div>
             </fieldset>
-        </fieldset>
+
+            {filters.filter((filter) => filter.checked).length > 0 &&
+                <fieldset>
+                    <legend>Next</legend>
+                    <Link to="/scale">Choose Scale</Link>
+                </fieldset>
+            }
+        </>
     );
 }
 

@@ -6,29 +6,33 @@ function Length() {
     const {resultLength, setResultLength} = useMusic();
 
     return (
-        <fieldset>
-            <legend>Choose length:</legend>
-            <select onChange={(event) => {
-                setResultLength(ResultLengths.filter((resultLength) => resultLength.length === Number(event.target.value))[0])
-            }}>
+        <>
+            <fieldset>
+                <legend>Choose length:</legend>
                 {ResultLengths.map((resultLength) =>
-                    <option
+                    <button
                         key={resultLength.name}
-                        value={resultLength.length}
+                        onClick={() => setResultLength(ResultLengths.filter((resultLengthData) =>
+                            resultLengthData.name === resultLength.name)[0])}
                     >
-                        {resultLength.name}{resultLength?.length && ` (${resultLength.length})`}
-                    </option>
-                )}
-            </select>
-            <fieldset>
-                <legend>The Length</legend>
-                <h1>{resultLength?.length ? resultLength.length : "Custom"}</h1>
+                        {resultLength.name}
+                    </button>)}
             </fieldset>
-            <fieldset>
-                <legend>Next</legend>
-                <Link to="/result">Get Result</Link>
-            </fieldset>
-        </fieldset>
+
+            {resultLength &&
+                <>
+                    <fieldset>
+                        <legend>The Length</legend>
+                        <h1>{resultLength?.length && `${resultLength.name}: `} {resultLength?.length ? resultLength.length : "Custom"}</h1>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Next</legend>
+                        <Link to="/result">Get Result</Link>
+                    </fieldset>
+                </>
+            }
+        </>
     );
 }
 

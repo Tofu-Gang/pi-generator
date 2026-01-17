@@ -3,23 +3,28 @@ import { Keys } from "../lib/musicData.js"
 import { Link } from "react-router";
 
 function Key() {
-    const {setKey} = useMusic();
+    const {key, setKey} = useMusic();
 
     return (
         <>
             <fieldset>
                 <legend>Choose a key:</legend>
-                <select onChange={(event) => {
-                    const newKey = event.target.value
-                    setKey(newKey);
-                }}>
-                    {Keys.map((key) => <option key={key} value={key}>{key}</option>)}
-                </select>
+                {Keys.map((key) => <button key={key} onClick={() => setKey(key)}>{key}</button>)}
             </fieldset>
-            <fieldset>
-                <legend>Next</legend>
-                <Link to="/filters">Filter Scales</Link>
-            </fieldset>
+
+            {key &&
+                <>
+                    <fieldset>
+                        <legend>Key</legend>
+                        <h1>{key}</h1>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Next</legend>
+                        <Link to="/filters">Filter Scales</Link>
+                    </fieldset>
+                </>
+            }
         </>
     );
 }

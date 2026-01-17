@@ -4,6 +4,7 @@ function Home() {
     return (
         <>
             <h1>HOME</h1>
+
             <fieldset>
                 <legend>Next</legend>
                 <Link to="/key">Choose Key</Link>
