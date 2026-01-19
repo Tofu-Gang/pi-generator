@@ -15,19 +15,19 @@ function CustomResultLengthPicker({setValue}) {
             <NumberSpinner
                 value={orderHundred}
                 setValue={setOrderHundred}
-                min={0}
+                min={(orderOne > 0 || orderTen > 0) ? 0 : 1}
                 max={9}
             />
             <NumberSpinner
                 value={orderTen}
                 setValue={setOrderTen}
-                min={0}
+                min={(orderOne > 0 || orderHundred > 0) ? 0 : 1}
                 max={9}
             />
             <NumberSpinner
                 value={orderOne}
                 setValue={setOrderOne}
-                min={1}
+                min={(orderTen > 0 || orderHundred > 0) ? 0 : 1}
                 max={9}
             />
         </div>
