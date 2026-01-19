@@ -11,7 +11,7 @@ function CustomResultLengthPicker({setValue}) {
     }, [orderOne, orderTen, orderHundred]);
 
     return (
-        <div style={{display: "flex"}}>
+        <div className="flex">
             <NumberSpinner
                 value={orderHundred}
                 setValue={setOrderHundred}

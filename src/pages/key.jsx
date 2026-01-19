@@ -7,7 +7,7 @@ function Key() {
     const {key, setKey} = useMusic();
 
     return (
-        <>
+        <div className="h-full">
             <Content title={"Choose a key:"} children={Keys.map((key) => <button key={key} onClick={() => setKey(key)}>{key}</button>)} />
 
             {key &&
@@ -16,7 +16,7 @@ function Key() {
                     <Content title={"Next"} children={<Link to="/filters">Filter Scales</Link>}/>
                 </>
             }
-        </>
+        </div>
     );
 }
 

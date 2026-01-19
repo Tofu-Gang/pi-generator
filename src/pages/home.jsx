@@ -16,14 +16,14 @@ function Home() {
     }, []);
 
     return (
-        <>
+        <div className="h-full">
             <h1>HOME</h1>
 
             <fieldset>
                 <legend>Next</legend>
                 <Link to="/key">Choose Key</Link>
             </fieldset>
-        </>
+        </div>
     );
 }
 

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { useMusic } from "../context/music.jsx";
 
-function Header() {
+function HeaderFooter({footer}) {
     const { key, filters, scale, resultLength, resultNotes } = useMusic();
     const breadcrumbs = [
         {
@@ -27,17 +27,16 @@ function Header() {
     const location = useLocation();
 
     return (
-        <div style={{display: "flex", border: "4px solid red"}}>
-            {location.pathname === "/" && <h3 style={{padding: "3px"}}>BREADCRUMBS:</h3>}
-            {location.pathname !== "/" && <><h3 style={{padding: "3px"}}><Link to="/">Home</Link></h3><h3 style={{padding: "3px"}}>BREADCRUMBS:</h3></>}
-            <div style={{display: "flex", flexWrap: "wrap"}}>{breadcrumbs.length > 0 && breadcrumbs.map((breadcrumb) =>
-                <h3
+        <div className={`flex border-4 ${footer ? "border-blue-950" : "border-red-600"}`}>
+            {location.pathname === "/" && <h3 className="p-3">BREADCRUMBS:</h3>}
+            {location.pathname !== "/" && <><h3 className="p-3"><Link to="/">Home</Link></h3><h3 className="p-3">BREADCRUMBS:</h3></>}
+            <div className="flex flex-wrap">{breadcrumbs.length > 0 && breadcrumbs.map((breadcrumb) =>
+                <h3 className={`
+                ${breadcrumb.done ? "text-green-600" : "text-gray-600"} 
+                border 
+                ${breadcrumb.done ? "border-green-600" : "border-gray-600"} 
+                p-3`}
                     key={breadcrumb.name}
-                    style={{
-                        color: breadcrumb.done ? "green" : "gray",
-                        border: `1px solid ${breadcrumb.done ? "green" : "gray"}`,
-                        padding: "3px"
-                    }}
                 >
                     {breadcrumb.name}
                 </h3>
@@ -46,4 +45,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default HeaderFooter;

@@ -6,7 +6,7 @@ function Scale() {
     const {scale, scales, setScale, notes} = useMusic();
 
     return (
-        <>
+        <div className="h-full">
             <Content title={"Choose a scale:"} children={
                 scales.map((scale) =>
                     <button
@@ -24,7 +24,7 @@ function Scale() {
                     <Content title={"Next"} children={<Link to="/length">Choose Length</Link>} />
                 </>
             }
-        </>
+        </div>
     );
 }
 

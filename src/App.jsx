@@ -1,4 +1,4 @@
-import Header from "./components/Header.jsx";
+import HeaderFooter from "./components/HeaderFooter.jsx";
 import { Routes, Route } from "react-router";
 import Home from "./pages/home.jsx";
 import Key from "./pages/key.jsx";
@@ -9,8 +9,8 @@ import Result from "./pages/result.jsx";
 
 function App() {
     return (
-        <>
-            <Header />
+        <div className="flex flex-col h-screen">
+            <HeaderFooter footer={false} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/key" element={<Key />} />
@@ -19,7 +19,8 @@ function App() {
                 <Route path="/length" element={<Length />} />
                 <Route path="/result" element={<Result />} />
             </Routes>
-        </>
+            <HeaderFooter footer={true} />
+        </div>
     );
 }
 

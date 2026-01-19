@@ -15,7 +15,7 @@ function Filters() {
     }
 
     return (
-        <>
+        <div className="h-full">
             <Content title={"Filter scales:"} children={
                 <div>
                     {filters.map((filter, index) =>
@@ -32,7 +32,7 @@ function Filters() {
             {filters.filter((filter) => filter.checked).length > 0 &&
                 <Content title={"Next"} children={<Link to="/scale">Choose Scale</Link>} />
             }
-        </>
+        </div>
     );
 }
 

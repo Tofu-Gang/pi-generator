@@ -16,7 +16,7 @@ function NumberSpinner({value, setValue, min, max}) {
     }
 
     return (
-        <div style={{display: "flex", flexDirection: "column"}}>
+        <div className="flex flex-col">
             <button onClick={increment}>⋀</button>
             <h1>{value}</h1>
             <button onClick={decrement}>⋁</button>

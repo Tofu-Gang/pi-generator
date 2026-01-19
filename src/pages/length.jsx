@@ -8,7 +8,7 @@ function Length() {
     const {resultLength, setResultLength} = useMusic();
 
     return (
-        <>
+        <div className="h-full">
             <Content
                 title={"Choose length:"}
                 children={
@@ -45,7 +45,7 @@ function Length() {
                     }
                 </>
             }
-        </>
+        </div>
     );
 }
 
