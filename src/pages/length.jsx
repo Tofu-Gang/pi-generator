@@ -1,6 +1,7 @@
 import { useMusic } from "../context/music.jsx";
 import { ResultLengths } from "../lib/musicData.js";
 import { Link } from "react-router";
+import CustomResultLengthPicker from "../components/CustomResultLengthPicker.jsx";
 
 function Length() {
     const {resultLength, setResultLength} = useMusic();
@@ -23,13 +24,25 @@ function Length() {
                 <>
                     <fieldset>
                         <legend>The Length</legend>
-                        <h1>{resultLength?.length && `${resultLength.name}: `} {resultLength?.length ? resultLength.length : "Custom"}</h1>
+                        {resultLength?.length &&
+                            <h1>{`${resultLength.name}${resultLength?.length ? ": " + resultLength.length : ""}`}</h1>
+                        }
+                        {resultLength.name === "Custom" &&
+                            <>
+                                <CustomResultLengthPicker
+                                    setValue={(value) =>
+                                        setResultLength((current) => ({...current, length: value}))}
+                                />
+                            </>
+                        }
                     </fieldset>
 
-                    <fieldset>
-                        <legend>Next</legend>
-                        <Link to="/result">Get Result</Link>
-                    </fieldset>
+                    {resultLength?.length &&
+                        <fieldset>
+                            <legend>Next</legend>
+                            <Link to="/result">Get Result</Link>
+                        </fieldset>
+                    }
                 </>
             }
         </>
