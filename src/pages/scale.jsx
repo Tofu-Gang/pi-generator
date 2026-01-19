@@ -1,34 +1,27 @@
 import { useMusic } from "../context/music.jsx";
 import { Link } from "react-router";
+import Content from "../components/Content.jsx";
 
 function Scale() {
     const {scale, scales, setScale, notes} = useMusic();
 
     return (
         <>
-            <fieldset>
-                <legend>Choose a scale:</legend>
-                {scales.map((scale) =>
+            <Content title={"Choose a scale:"} children={
+                scales.map((scale) =>
                     <button
                         key={scale.name}
-                        onClick={() => setScale(scales.filter((scaleData) =>
-                            scaleData.name === scale.name)[0])}
+                        onClick={() => setScale(scales.filter((scaleData) => scaleData.name === scale.name)[0])}
                     >
                         {scale.display}
-                    </button>)}
-            </fieldset>
+                    </button>)
+                }
+            />
 
             {scale &&
                 <>
-                    <fieldset>
-                        <legend>Notes:</legend>
-                        <h1>{notes.join(", ")}</h1>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Next</legend>
-                        <Link to="/length">Choose Length</Link>
-                    </fieldset>
+                    <Content title={"Notes:"} children={<h1>{notes.join(", ")}</h1>} />
+                    <Content title={"Next"} children={<Link to="/length">Choose Length</Link>} />
                 </>
             }
         </>

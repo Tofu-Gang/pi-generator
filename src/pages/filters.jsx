@@ -1,6 +1,7 @@
 import { useMusic } from "../context/music.jsx";
 import Checkbox from "../components/Checkbox.jsx";
 import { Link } from "react-router";
+import Content from "../components/Content.jsx";
 
 function Filters() {
     const {filters, setFilters} = useMusic();
@@ -15,8 +16,7 @@ function Filters() {
 
     return (
         <>
-            <fieldset>
-                <legend>Filter scales:</legend>
+            <Content title={"Filter scales:"} children={
                 <div>
                     {filters.map((filter, index) =>
                         <Checkbox
@@ -27,13 +27,10 @@ function Filters() {
                         />
                     )}
                 </div>
-            </fieldset>
+            } />
 
             {filters.filter((filter) => filter.checked).length > 0 &&
-                <fieldset>
-                    <legend>Next</legend>
-                    <Link to="/scale">Choose Scale</Link>
-                </fieldset>
+                <Content title={"Next"} children={<Link to="/scale">Choose Scale</Link>} />
             }
         </>
     );
