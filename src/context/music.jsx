@@ -27,8 +27,16 @@ export function MusicProvider({ children }) {
     }, [filters]);
 
     useEffect(() => {
+        if(!scales.map((scale) => scale.name).includes(scale?.name)) {
+            setScale(Defaults.scale);
+        }
+    }, [scales]);
+
+    useEffect(() => {
         if(key && scale) {
             setNotes(getScaleNotes(key, scale.name));
+        } else {
+            setNotes(Defaults.notes);
         }
     }, [key, scale]);
 
