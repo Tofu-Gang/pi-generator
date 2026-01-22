@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useMusic, Defaults } from "../context/music.jsx";
 import { Link } from "react-router";
+import { PiGeneratorRoutes } from "../App.jsx";
 
 function Home() {
     const {setKey, setFilters, setScales, setScale, setNotes, setResultLength, setResultNotes} = useMusic();
@@ -21,7 +22,7 @@ function Home() {
 
             <fieldset>
                 <legend>Next</legend>
-                <Link to="/key">Choose Key</Link>
+                <Link to={PiGeneratorRoutes.Key.path} >Choose Key</Link>
             </fieldset>
         </div>
     );

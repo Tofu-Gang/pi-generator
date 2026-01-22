@@ -2,6 +2,7 @@ import { useMusic } from "../context/music.jsx";
 import { Keys } from "../lib/musicData.js"
 import { Link } from "react-router";
 import Content from "../components/Content.jsx";
+import { PiGeneratorRoutes } from "../App.jsx";
 
 function Key() {
     const {key, setKey} = useMusic();
@@ -13,7 +14,7 @@ function Key() {
             {key &&
                 <>
                     <Content title={"Key"} children={<h1>{key}</h1>} />
-                    <Content title={"Next"} children={<Link to="/filters">Filter Scales</Link>}/>
+                    <Content title={"Next"} children={<Link to={PiGeneratorRoutes.Filters.path}>Filter Scales</Link>}/>
                 </>
             }
         </div>

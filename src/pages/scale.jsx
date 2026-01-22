@@ -1,6 +1,7 @@
 import { useMusic } from "../context/music.jsx";
 import { Link } from "react-router";
 import Content from "../components/Content.jsx";
+import { PiGeneratorRoutes } from "../App.jsx";
 
 function Scale() {
     const {scale, scales, setScale, notes} = useMusic();
@@ -21,7 +22,7 @@ function Scale() {
             {scale &&
                 <>
                     <Content title={"Notes:"} children={<h1>{notes.join(", ")}</h1>} />
-                    <Content title={"Next"} children={<Link to="/length">Choose Length</Link>} />
+                    <Content title={"Next"} children={<Link to={PiGeneratorRoutes.ResultLength.path}>Choose Length</Link>} />
                 </>
             }
         </div>

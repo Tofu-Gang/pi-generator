@@ -2,6 +2,7 @@ import { useMusic } from "../context/music.jsx";
 import Checkbox from "../components/Checkbox.jsx";
 import { Link } from "react-router";
 import Content from "../components/Content.jsx";
+import { PiGeneratorRoutes } from "../App.jsx";
 
 function Filters() {
     const {filters, setFilters} = useMusic();
@@ -30,7 +31,7 @@ function Filters() {
             } />
 
             {filters.filter((filter) => filter.checked).length > 0 &&
-                <Content title={"Next"} children={<Link to="/scale">Choose Scale</Link>} />
+                <Content title={"Next"} children={<Link to={PiGeneratorRoutes.Scale.path}>Choose Scale</Link>} />
             }
         </div>
     );
