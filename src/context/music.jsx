@@ -14,31 +14,118 @@ export const Defaults = {
 }
 
 export function MusicProvider({ children }) {
-    const [key, setKey] = useState(Defaults.key);
-    const [filters, setFilters] = useState(Defaults.filters);
-    const [scales, setScales] = useState(Defaults.scales);
-    const [scale, setScale] = useState(Defaults.scale);
-    const [notes, setNotes] = useState(Defaults.notes);
-    const [resultLength, setResultLength] = useState(Defaults.resultLength);
-    const [resultNotes, setResultNotes] = useState(Defaults.resultNotes);
+    const [key, setKey] = useState({
+        value: Defaults.key,
+        available() {
+            return true;
+        },
+        done() {
+            return !!this.value;
+        }
+    });
+
+    const [filters, setFilters] = useState({
+        value: Defaults.filters,
+        available() {
+            return true;
+        },
+        done() {
+            return this.value.some((filter) => filter.checked);
+        }
+    });
+
+    const [scales, setScales] = useState({
+        value: Defaults.scales,
+        done() {
+            return this.value.length > 0;
+        }
+    });
+
+    const [scale, setScale] = useState({
+        value: Defaults.scale,
+        available() {
+            return scales.done();
+        },
+        done() {
+            return !!this.value;
+        }
+    });
+
+    const [notes, setNotes] = useState({
+        value: Defaults.notes,
+        done() {
+            return this.value.length > 0;
+        }
+    });
+
+    const [resultLength, setResultLength] = useState({
+        value: Defaults.resultLength,
+        available() {
+            return true;
+        },
+        done() {
+            return !!this.value;
+        }
+    });
+
+    const [resultNotes, setResultNotes] = useState({
+        value: Defaults.resultNotes,
+        available() {
+            return key.done() && scale.done() && resultLength.done();
+        },
+        done() {
+            return this.value.length > 0
+        }
+    });
 
     useEffect(() => {
-        setScales(getScalesFiltered(filters));
+        // update available scales based on selected filters
+        setScales((current) => ({
+            ...current,
+            value: getScalesFiltered(filters.value)
+        }));
     }, [filters]);
 
     useEffect(() => {
-        if(!scales.map((scale) => scale.name).includes(scale?.name)) {
-            setScale(Defaults.scale);
-        }
+        setScale((current) => ({
+            ...current,
+            // clear selected scale if it is no longer available based on selected filters
+            ...(!scales.value.map((scaleData) => scaleData.name).includes(scale.value?.name) && {value: Defaults.scale}),
+            // referencing other states for availability flag causes the need to refresh this in an effect, otherwise
+            // stale value is returned
+            available() {
+                return scales.done();
+            }
+        }));
     }, [scales]);
 
     useEffect(() => {
-        if(key && scale) {
-            setNotes(getScaleNotes(key, scale.name));
-        } else {
-            setNotes(Defaults.notes);
-        }
+        setNotes((current) => ({
+            ...current,
+            // scale notes can be generated only if key and scale is already selected
+            ...(key.done() && scale.done() ?
+                {value: getScaleNotes(key.value, scale.value.name)} :
+                {value: Defaults.notes})
+        }));
     }, [key, scale]);
+
+    useEffect(() => {
+        setResultNotes((current) => ({
+            ...current,
+            // referencing other states for availability flag causes the need to refresh this in an effect, otherwise
+            // stale value is returned
+            available() {
+                return key.done() && scale.done() && resultLength.done();
+            }
+        }));
+        if(resultNotes.done()) {
+            // generated notes depend on multiple states; clear generated notes if any of the states changes
+            setResultNotes((current) => ({
+                ...current,
+                value: Defaults.resultNotes
+            }))
+        }
+    }, [key, scale, resultLength])
 
     return <MusicContext.Provider
         value={{
@@ -48,7 +135,7 @@ export function MusicProvider({ children }) {
             scale, setScale,
             notes, setNotes,
             resultLength, setResultLength,
-            resultNotes, setResultNotes
+            resultNotes, setResultNotes,
         }}
     >
         {children}

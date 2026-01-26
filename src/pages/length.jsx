@@ -16,8 +16,11 @@ function Length() {
                     ResultLengths.map((resultLength) =>
                         <button
                             key={resultLength.name}
-                            onClick={() => setResultLength(ResultLengths.filter((resultLengthData) =>
-                                resultLengthData.name === resultLength.name)[0])}
+                            onClick={() => setResultLength((current) => ({
+                                ...current,
+                                value: ResultLengths.filter((resultLengthData) =>
+                                    resultLengthData.name === resultLength.name)[0]
+                            }))}
                         >
                             {resultLength.name}
                         </button>
@@ -25,24 +28,27 @@ function Length() {
                 }
             />
 
-            {resultLength &&
+            {resultLength.done() &&
                 <>
                     <Content title={"The Length:"} children={
                         <>
-                            {resultLength?.length &&
-                                <h1>{`${resultLength.name}${resultLength?.length ? `: ${resultLength.length}` : ""}`}</h1>
-                            }
-                            {resultLength.name === "Custom" &&
+                            {<h1>{`${resultLength.value.name}${resultLength.value?.length ? `: ${resultLength.value.length}` : ""}`}</h1>}
+                            {resultLength.value.name === "Custom" &&
                                 <CustomResultLengthPicker
-                                    setValue={(value) =>
-                                        setResultLength((current) => ({...current, length: value}))}
+                                    setValue={(length) => setResultLength((current) => ({
+                                        ...current,
+                                        value: {
+                                            ...current.value,
+                                            length
+                                        }
+                                    }))}
                                 />
                             }
                         </>
                     }/>
 
-                    {resultLength?.length &&
-                        <Content title={"Next"} children={<Link to={PiGeneratorRoutes.Result.path}>Get Result</Link>} />
+                    {resultLength.done() &&
+                        <Content title={"Next"} children={<Link to={PiGeneratorRoutes.ResultNotes.path}>Get Result</Link>} />
                     }
                 </>
             }

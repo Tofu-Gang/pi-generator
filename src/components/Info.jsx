@@ -6,12 +6,13 @@ function Info() {
     return (
         <>
             <div className="grow"></div>
-            {key && <h3 className="p-3">Key: {key}</h3>}
-            {filters.filter((filter) => filter.checked).length > 0 && <h3 className="p-3">Filters chosen</h3>}
-            {key && scale && <h3 className="p-3">Scale: {key} {scale.display}</h3>}
-            {notes.length > 0 && <h3 className="p-3">Notes: {notes.join(", ")}</h3>}
-            {resultLength?.length && <h3 className="p-3">Result length: {resultLength.name}({resultLength.length} notes)</h3>}
-            {resultNotes.length > 0 && <h3 className="p-3">GO PLAY!</h3>}
+            {key.done() && !scale.done() && <h3 className="p-3">Key: {key.value}</h3>}
+            {filters.done() && !scale.done() && <h3 className="p-3">Filters chosen</h3>}
+            {key.done() && scale.done() && <h3 className="p-3">Scale: {key.value} {scale.value.display}</h3>}
+            {scale.done() && !key.done() && <h3 className="p-3">Scale: {scale.value.display}</h3>}
+            {notes.done() && <h3 className="p-3">Notes: {notes.value.join(", ")}</h3>}
+            {resultLength.done() && <h3 className="p-3">Result length: {resultLength.value.name}({resultLength.value.length} notes)</h3>}
+            {resultNotes.done() && <h3 className="p-3">GO PLAY!</h3>}
             <div className="grow"></div>
         </>
     );

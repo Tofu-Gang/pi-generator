@@ -28,7 +28,7 @@ export const PiGeneratorRoutes = {
         path: "/length",
         element: <Length />
     },
-    Result: {
+    ResultNotes: {
         path: "/result",
         element: <Result />
     }

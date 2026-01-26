@@ -9,14 +9,20 @@ function Result() {
         <div className="h-full">
             <Content title={"Get result:"} children={
                 <button
-                    onClick={async () => setResultNotes(await getResultNotes(notes, resultLength))}
+                    onClick={async () => {
+                        const resultNotes = await getResultNotes(notes.value, resultLength.value);
+                        setResultNotes((current) => ({
+                            ...current,
+                            value: resultNotes,
+                        }))
+                    }}
                 >
                     FETCH!
                 </button>
             }/>
 
-            {resultNotes.length > 0 &&
-                <Content title={"Result Notes:"} children={<h1>{resultNotes.join(", ")}</h1>} />
+            {resultNotes.done() &&
+                <Content title={"Result Notes:"} children={<h1>{resultNotes.value.join(", ")}</h1>} />
             }
         </div>
     );

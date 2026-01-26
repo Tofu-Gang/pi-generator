@@ -4,24 +4,27 @@ import Content from "../components/Content.jsx";
 import { PiGeneratorRoutes } from "../App.jsx";
 
 function Scale() {
-    const {scale, scales, setScale, notes} = useMusic();
+    const {scales, scale, setScale, notes} = useMusic();
 
     return (
         <div className="h-full">
             <Content title={"Choose a scale:"} children={
-                scales.map((scale) =>
+                scales.value.map((scaleData) =>
                     <button
-                        key={scale.name}
-                        onClick={() => setScale(scales.filter((scaleData) => scaleData.name === scale.name)[0])}
+                        key={scaleData.name}
+                        onClick={() => setScale((current) => ({
+                            ...current,
+                            value: {...scaleData}
+                        }))}
                     >
-                        {scale.display}
+                        {scaleData.display}
                     </button>)
                 }
             />
 
-            {scale &&
+            {scale.done() &&
                 <>
-                    <Content title={"Notes:"} children={<h1>{notes.join(", ")}</h1>} />
+                    <Content title={"Notes:"} children={<h1>{notes.value.join(", ")}</h1>} />
                     <Content title={"Next"} children={<Link to={PiGeneratorRoutes.ResultLength.path}>Choose Length</Link>} />
                 </>
             }

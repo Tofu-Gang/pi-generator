@@ -5,47 +5,32 @@ import { Link } from "react-router";
 function Breadcrumbs() {
     const {key, filters, scale, resultLength, resultNotes} = useMusic();
 
-    const KeyBreadcrumb = {
-        name: "Key",
-        done: !!key,
-        available: true,
-        path: PiGeneratorRoutes.Key.path
-    };
-
-    const FiltersBreadcrumb = {
-        name: "Filters",
-        done: filters.some((filter) => filter.checked),
-        available: true,
-        path: PiGeneratorRoutes.Filters.path
-    };
-
-    const ScaleBreadcrumb = {
-        name: "Scale",
-        done: !!scale,
-        available: KeyBreadcrumb.done && FiltersBreadcrumb.done,
-        path: PiGeneratorRoutes.Scale.path
-    }
-
-    const ResultLengthBreadcrumb = {
-        name: "Result Length",
-        done: !!resultLength,
-        available: true,
-        path: PiGeneratorRoutes.ResultLength.path
-    };
-
-    const ResultBreadcrumb = {
-        name: "Result Notes",
-        done: resultNotes.length > 0,
-        available: KeyBreadcrumb.done && ScaleBreadcrumb.done && ResultLengthBreadcrumb.done,
-        path: PiGeneratorRoutes.Result.path
-    }
-
     const Breadcrumbs = [
-        KeyBreadcrumb,
-        FiltersBreadcrumb,
-        ScaleBreadcrumb,
-        ResultLengthBreadcrumb,
-        ResultBreadcrumb
+        {
+            display: "Key",
+            state: key,
+            path: PiGeneratorRoutes.Key.path
+        },
+        {
+            display: "Filters",
+            state: filters,
+            path: PiGeneratorRoutes.Filters.path
+        },
+        {
+            display: "Scale",
+            state: scale,
+            path: PiGeneratorRoutes.Scale.path
+        },
+        {
+            display: "Result Length",
+            state: resultLength,
+            path: PiGeneratorRoutes.ResultLength.path
+        },
+        {
+            display: "Result Notes",
+            state: resultNotes,
+            path: PiGeneratorRoutes.ResultNotes.path
+        }
     ];
 
     return (
@@ -54,14 +39,14 @@ function Breadcrumbs() {
                 {Breadcrumbs.map((breadcrumb) =>
                     <Link
                         className={`
-                    ${breadcrumb.done ? "text-green-600" : breadcrumb.available ? "text-yellow-600" : "text-gray-600"} 
+                    ${breadcrumb.state.done() ? "text-green-600" : breadcrumb.state.available() ? "text-yellow-600" : "text-gray-600"} 
                     border
-                    ${breadcrumb.done ? "border-green-600" : breadcrumb.available ? "border-yellow-600" : "border-gray-600"}
-                    p-3 ${!breadcrumb.done && !breadcrumb.available && "pointer-events-none"}`}
-                        key={breadcrumb.name}
+                    ${breadcrumb.state.done() ? "border-green-600" : breadcrumb.state.available() ? "border-yellow-600" : "border-gray-600"}
+                    p-3 ${!breadcrumb.state.done() && !breadcrumb.state.available() && "pointer-events-none"}`}
+                        key={breadcrumb.display}
                         to={breadcrumb.path}
                     >
-                        {breadcrumb.name}
+                        {breadcrumb.display}
                     </Link>
                 )}
             </div>

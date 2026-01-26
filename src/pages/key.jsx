@@ -9,11 +9,26 @@ function Key() {
 
     return (
         <div className="h-full">
-            <Content title={"Choose a key:"} children={Keys.map((key) => <button key={key} onClick={() => setKey(key)}>{key}</button>)} />
+            <Content
+                title={"Choose a key:"}
+                children={Keys.map((keyNote) =>
+                    <button
+                        key={keyNote}
+                        onClick={() => {
+                            setKey((current) => ({
+                                ...current,
+                                value: keyNote
+                            }));
+                        }}
+                    >
+                        {keyNote}
+                    </button>
+                )}
+            />
 
-            {key &&
+            {key.done() &&
                 <>
-                    <Content title={"Key"} children={<h1>{key}</h1>} />
+                    <Content title={"Key"} children={<h1>{key.value}</h1>} />
                     <Content title={"Next"} children={<Link to={PiGeneratorRoutes.Filters.path}>Filter Scales</Link>}/>
                 </>
             }

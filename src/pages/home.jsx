@@ -7,13 +7,35 @@ function Home() {
     const {setKey, setFilters, setScales, setScale, setNotes, setResultLength, setResultNotes} = useMusic();
 
     useEffect(() => {
-        setKey(Defaults.key);
-        setFilters(Defaults.filters);
-        setScales(Defaults.scales);
-        setScale(Defaults.scale);
-        setNotes(Defaults.notes);
-        setResultLength(Defaults.resultLength);
-        setResultNotes(Defaults.resultNotes);
+        setKey((current) => ({
+            ...current,
+            value: Defaults.key
+        }));
+        setFilters((current) => ({
+            ...current,
+            value: Defaults.filters
+        }));
+        setScales((current) => ({
+            ...current,
+            value: Defaults.scales
+        }));
+        setScale((current) => ({
+            ...current,
+            value: Defaults.scale
+        }));
+        setNotes((current) => ({
+            ...current,
+            value: Defaults.notes
+        }));
+        setResultLength((current) => ({
+            ...current,
+            value: Defaults.resultLength
+
+        }));
+        setResultNotes((current) => ({
+            ...current,
+            value: Defaults.resultNotes
+        }));
     }, []);
 
     return (
@@ -22,7 +44,7 @@ function Home() {
 
             <fieldset>
                 <legend>Next</legend>
-                <Link to={PiGeneratorRoutes.Key.path} >Choose Key</Link>
+                <Link to={PiGeneratorRoutes.Key.path}>Choose Key</Link>
             </fieldset>
         </div>
     );

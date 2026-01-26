@@ -8,18 +8,19 @@ function Filters() {
     const {filters, setFilters} = useMusic();
 
     function onChange(checkboxIndex) {
-        setFilters((current) =>
-            current.map((filter, index) =>
+        setFilters((current) => ({
+            ...current,
+            value: current.value.map((filter, index) =>
                 index === checkboxIndex ? {...filter, checked: !filter.checked} : {...filter}
             )
-        );
+        }));
     }
 
     return (
         <div className="h-full">
             <Content title={"Filter scales:"} children={
                 <div>
-                    {filters.map((filter, index) =>
+                    {filters.value.map((filter, index) =>
                         <Checkbox
                             key={filter.name}
                             name={filter.name}
@@ -30,7 +31,7 @@ function Filters() {
                 </div>
             } />
 
-            {filters.filter((filter) => filter.checked).length > 0 &&
+            {filters.done() &&
                 <Content title={"Next"} children={<Link to={PiGeneratorRoutes.Scale.path}>Choose Scale</Link>} />
             }
         </div>
