@@ -36,7 +36,7 @@ export const PiGeneratorRoutes = {
 
 function App() {
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen bg-black text-green-600">
             <HeaderFooter footer={false} />
             <Routes>
                 {Object.keys(PiGeneratorRoutes).map((key) =>

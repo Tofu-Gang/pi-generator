@@ -1,7 +1,7 @@
 function Content({title, children}) {
     return (
         <fieldset>
-            <legend>{title}</legend>
+            <legend className="text-xl">{title}</legend>
             {children}
         </fieldset>
     );

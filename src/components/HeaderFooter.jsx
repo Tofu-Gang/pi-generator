@@ -7,7 +7,7 @@ function HeaderFooter({footer}) {
     const location = useLocation();
 
     return (
-        <div className={`flex justify-between border-4 ${footer ? "border-blue-950" : "border-red-600"}`}>
+        <div className="flex justify-between border-4 border-green-600">
             {location.pathname !== PiGeneratorRoutes.Home.path && !footer && <h3 className="p-3"><Link to="/">Home</Link></h3>}
             {location.pathname === PiGeneratorRoutes.Home.path && <div></div>}
             {!footer && <Breadcrumbs />}
