@@ -48,6 +48,7 @@ function Home() {
             <h1 className="p-3 text-xl">Available actions <span className="text-yellow-600 animate-pulse">glow in gold</span>.</h1>
             <h1 className="p-3 text-xl">What is not available yet is <span className="text-gray-600">greyed out</span>.</h1>
             <h1 className="p-3 text-xl">What is already set is <span className="text-green-600">green</span>.</h1>
+            <h1 className="p-3 text-xl">You can always <span className="p-3 rounded-full bg-red-600 text-black">Reset</span> your progress.</h1>
             <h1 className="p-3 text-3xl">Go for it!</h1>
             <AvailableLinks />
         </div>

@@ -8,7 +8,7 @@ function HeaderFooter({footer}) {
 
     return (
         <div className="flex justify-between border-4 border-green-600">
-            {location.pathname !== PiGeneratorRoutes.Home.path && !footer && <h3 className="p-3"><Link to="/">Home</Link></h3>}
+            {location.pathname !== PiGeneratorRoutes.Home.path && !footer && <h3 className="p-3 m-1 rounded-full bg-red-600 text-black"><Link to="/">Reset</Link></h3>}
             {location.pathname === PiGeneratorRoutes.Home.path && <div></div>}
             {!footer && <Breadcrumbs />}
             {!footer && <div></div>}
