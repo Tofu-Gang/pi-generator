@@ -1,9 +1,8 @@
 import { useMusic } from "../context/music.jsx";
 import { ResultLengths } from "../lib/musicData.js";
-import { Link } from "react-router";
 import CustomResultLengthPicker from "../components/CustomResultLengthPicker.jsx";
 import Content from "../components/Content.jsx";
-import { PiGeneratorRoutes } from "../App.jsx";
+import AvailableLinks from "../components/AvailableLinks.jsx";
 
 function Length() {
     const {resultLength, setResultLength} = useMusic();
@@ -46,10 +45,7 @@ function Length() {
                             }
                         </>
                     }/>
-
-                    {resultLength.done() &&
-                        <Content title={"Next"} children={<Link to={PiGeneratorRoutes.ResultNotes.path}>Get Result</Link>} />
-                    }
+                    <AvailableLinks />
                 </>
             }
         </div>

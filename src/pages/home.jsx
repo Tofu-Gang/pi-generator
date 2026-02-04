@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useMusic, Defaults } from "../context/music.jsx";
-import { Link } from "react-router";
-import { PiGeneratorRoutes } from "../App.jsx";
+import AvailableLinks from "../components/AvailableLinks.jsx";
 
 function Home() {
     const {setKey, setFilters, setScales, setScale, setNotes, setResultLength, setResultNotes} = useMusic();
@@ -41,11 +40,7 @@ function Home() {
     return (
         <div className="h-full">
             <h1>HOME</h1>
-
-            <fieldset>
-                <legend>Next</legend>
-                <Link to={PiGeneratorRoutes.Key.path}>Choose Key</Link>
-            </fieldset>
+            <AvailableLinks />
         </div>
     );
 }

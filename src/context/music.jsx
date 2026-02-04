@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { getScaleNotes, getScalesFiltered } from "../lib/music.js";
 import { Tags } from "../lib/musicData.js";
+import {PiGeneratorRoutes} from "../App.jsx";
 
 const MusicContext = createContext();
 export const Defaults = {
@@ -78,6 +79,34 @@ export function MusicProvider({ children }) {
         }
     });
 
+    const Breadcrumbs = [
+        {
+            display: "Set Key",
+            state: key,
+            path: PiGeneratorRoutes.Key.path
+        },
+        {
+            display: "Set Filters",
+            state: filters,
+            path: PiGeneratorRoutes.Filters.path
+        },
+        {
+            display: "Set Scale",
+            state: scale,
+            path: PiGeneratorRoutes.Scale.path
+        },
+        {
+            display: "Set Result Length",
+            state: resultLength,
+            path: PiGeneratorRoutes.ResultLength.path
+        },
+        {
+            display: "Get Result Notes",
+            state: resultNotes,
+            path: PiGeneratorRoutes.ResultNotes.path
+        }
+    ];
+
     useEffect(() => {
         // update available scales based on selected filters
         setScales((current) => ({
@@ -136,6 +165,7 @@ export function MusicProvider({ children }) {
             notes, setNotes,
             resultLength, setResultLength,
             resultNotes, setResultNotes,
+            links: Breadcrumbs
         }}
     >
         {children}

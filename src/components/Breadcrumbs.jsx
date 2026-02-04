@@ -3,40 +3,12 @@ import { PiGeneratorRoutes } from "../App.jsx";
 import { Link } from "react-router";
 
 function Breadcrumbs() {
-    const {key, filters, scale, resultLength, resultNotes} = useMusic();
-
-    const Breadcrumbs = [
-        {
-            display: "Key",
-            state: key,
-            path: PiGeneratorRoutes.Key.path
-        },
-        {
-            display: "Filters",
-            state: filters,
-            path: PiGeneratorRoutes.Filters.path
-        },
-        {
-            display: "Scale",
-            state: scale,
-            path: PiGeneratorRoutes.Scale.path
-        },
-        {
-            display: "Result Length",
-            state: resultLength,
-            path: PiGeneratorRoutes.ResultLength.path
-        },
-        {
-            display: "Result Notes",
-            state: resultNotes,
-            path: PiGeneratorRoutes.ResultNotes.path
-        }
-    ];
+    const {links} = useMusic();
 
     return (
         <>
             <div className="flex flex-wrap">
-                {Breadcrumbs.map((breadcrumb) =>
+                {links.map((breadcrumb) =>
                     <Link
                         className={`
                     ${breadcrumb.state.done() ? "text-green-600" : breadcrumb.state.available() ? "text-yellow-600" : "text-gray-600"} 
