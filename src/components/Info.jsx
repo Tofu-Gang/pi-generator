@@ -13,6 +13,7 @@ function Info() {
             {notes.done() && <h3 className="p-3">Notes: {notes.value.join(", ")}</h3>}
             {resultLength.done() && <h3 className="p-3">Result length: {resultLength.value.name}({resultLength.value.length} notes)</h3>}
             {resultNotes.done() && <h3 className="p-3">GO PLAY!</h3>}
+            {!key.done() && !scale.done() && !resultLength.done() && !resultNotes.done() && <h3 className="p-3">Pi Generator by TofuGang SW</h3>}
             <div className="grow"></div>
         </>
     );
