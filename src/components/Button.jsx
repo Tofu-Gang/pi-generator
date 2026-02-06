@@ -4,7 +4,7 @@ function Button({available, done, isCurrentPage, link, display}) {
     return (
         <Link
             className={`
-            m-1 p-3 rounded-full
+            m-1 p-3 rounded-full w-fit
             ${done ? isCurrentPage ?
                     "text-black bg-green-600" :
                     "text-green-600" :
