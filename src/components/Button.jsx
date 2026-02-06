@@ -1,6 +1,6 @@
 import {Link} from "react-router";
 
-function Button({available, done, isCurrentPage, link, display}) {
+function Button({available, done, isCurrentPage, link, display, onClick}) {
     return (
         <Link
             className={`
@@ -20,6 +20,7 @@ function Button({available, done, isCurrentPage, link, display}) {
                     "border-gray-600"}
                         ${!done && !available && "pointer-events-none"}`}
             to={link}
+            onClick={onClick}
         >
             {display}
         </Link>

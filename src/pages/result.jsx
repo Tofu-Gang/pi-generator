@@ -2,6 +2,7 @@ import { useMusic } from "../context/music.jsx";
 import { getResultNotes } from "../lib/music.js";
 import Content from "../components/Content.jsx";
 import AvailableLinks from "../components/AvailableLinks.jsx";
+import Button from "../components/Button.jsx";
 
 function Result() {
     const {notes, resultLength, resultNotes, setResultNotes} = useMusic();
@@ -9,7 +10,11 @@ function Result() {
     return (
         <div className="h-full">
             <Content title={"Get result:"} children={
-                <button
+                <Button
+                    available={resultNotes.available()}
+                    done={resultNotes.done()}
+                    isCurrentPage={true}
+                    display={"FETCH!"}
                     onClick={async () => {
                         const resultNotes = await getResultNotes(notes.value, resultLength.value);
                         setResultNotes((current) => ({
@@ -17,9 +22,7 @@ function Result() {
                             value: resultNotes,
                         }))
                     }}
-                >
-                    FETCH!
-                </button>
+                />
             }/>
 
             {resultNotes.done() &&
