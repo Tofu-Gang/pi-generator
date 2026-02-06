@@ -3,6 +3,7 @@ import { ResultLengths } from "../lib/musicData.js";
 import CustomResultLengthPicker from "../components/CustomResultLengthPicker.jsx";
 import Content from "../components/Content.jsx";
 import AvailableLinks from "../components/AvailableLinks.jsx";
+import Checkbox from "../components/Checkbox.jsx";
 
 function Length() {
     const {resultLength, setResultLength} = useMusic();
@@ -10,44 +11,37 @@ function Length() {
     return (
         <div className="h-full">
             <Content
-                title={"Choose length:"}
+                title={"Set result length:"}
                 children={
-                    ResultLengths.map((resultLength) =>
-                        <button
-                            key={resultLength.name}
-                            onClick={() => setResultLength((current) => ({
+                    ResultLengths.map((resultLengthData) =>
+                        <Checkbox
+                            className={"h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-green-600 checked:bg-green-600"}
+                            key={resultLengthData.name}
+                            name={resultLengthData.name}
+                            checked={resultLengthData.name === resultLength.value?.name}
+                            onChange={() => setResultLength((current) => ({
                                 ...current,
-                                value: ResultLengths.filter((resultLengthData) =>
-                                    resultLengthData.name === resultLength.name)[0]
+                                value: current.value?.name === resultLengthData.name ? null : {...resultLengthData}
                             }))}
-                        >
-                            {resultLength.name}
-                        </button>
+                        />
                     )
                 }
             />
 
-            {resultLength.done() &&
-                <>
-                    <Content title={"The Length:"} children={
-                        <>
-                            {<h1>{`${resultLength.value.name}${resultLength.value?.length ? `: ${resultLength.value.length}` : ""}`}</h1>}
-                            {resultLength.value.name === "Custom" &&
-                                <CustomResultLengthPicker
-                                    setValue={(length) => setResultLength((current) => ({
-                                        ...current,
-                                        value: {
-                                            ...current.value,
-                                            length
-                                        }
-                                    }))}
-                                />
+            {resultLength.value?.name === "Custom" &&
+                <Content title={"Set custom length:"} children={
+                    <CustomResultLengthPicker
+                        setValue={(length) => setResultLength((current) => ({
+                            ...current,
+                            value: {
+                                ...current.value,
+                                length
                             }
-                        </>
-                    }/>
-                    <AvailableLinks />
-                </>
+                        }))}
+                    />
+                } />
             }
+            <AvailableLinks />
         </div>
     );
 }

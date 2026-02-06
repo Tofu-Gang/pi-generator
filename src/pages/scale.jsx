@@ -1,26 +1,30 @@
 import { useMusic } from "../context/music.jsx";
 import Content from "../components/Content.jsx";
+import Checkbox from "../components/Checkbox.jsx";
 import AvailableLinks from "../components/AvailableLinks.jsx";
 
 function Scale() {
-    const {scales, setScale} = useMusic();
+    const {scales, setScale, scale} = useMusic();
 
     return (
         <div className="h-full">
-            <Content title={"Choose a scale:"} children={
-                scales.value.map((scaleData) =>
-                    <button
-                        key={scaleData.name}
-                        onClick={() => setScale((current) => ({
-                            ...current,
-                            value: {...scaleData}
-                        }))}
-                    >
-                        {scaleData.display}
-                    </button>)
-                }
+            <Content title={"Set scale:"} children={
+                <div className="flex flex-col">
+                    {scales.value.map((scaleData) =>
+                        <Checkbox
+                            className={"h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-green-600 checked:bg-green-600"}
+                            key={scaleData.name}
+                            name={scaleData.display}
+                            checked={scale.value?.name === scaleData.name}
+                            onChange={() => setScale((current) => ({
+                                ...current,
+                                value: current.value?.name === scaleData.name ? null : {...scaleData}
+                            }))}
+                        />
+                    )}
+                </div>}
             />
-            <AvailableLinks />
+            <AvailableLinks/>
         </div>
     );
 }

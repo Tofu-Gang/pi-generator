@@ -1,14 +1,15 @@
-function Checkbox({name, checked, onChange}) {
+function Checkbox({className, name, checked, onChange}) {
     return (
-        <>
+        <div className="flex items-center">
             <input
+                className={`m-1 ${className}`}
                 type="checkbox"
                 id={name}
                 name={name}
                 checked={checked}
                 onChange={onChange}/>
-            <label htmlFor={name}>{name}</label>
-        </>
+            <label className="m-1" htmlFor={name}>{name}</label>
+        </div>
     );
 }
 
