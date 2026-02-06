@@ -5,7 +5,7 @@ import AvailableLinks from "../components/AvailableLinks.jsx";
 import Button from "../components/Button.jsx";
 
 function Result() {
-    const {notes, resultLength, resultNotes, setResultNotes} = useMusic();
+    const {key, scale, notes, resultLength, resultNotes, setResultNotes} = useMusic();
 
     return (
         <div className="h-full">
@@ -26,7 +26,7 @@ function Result() {
             }/>
 
             {resultNotes.done() &&
-                <Content title={"Result Notes:"} children={<h1>{resultNotes.value.join(", ")}</h1>} />
+                <Content title={`${resultLength.value.name} in ${key.value} ${scale.value.name}:`} children={<h1>{resultNotes.value.join(", ")}</h1>} />
             }
             <AvailableLinks />
         </div>
