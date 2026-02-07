@@ -1,14 +1,14 @@
 import { useMusic } from "../context/music.jsx";
 import { Keys } from "../lib/musicData.js"
 import Content from "../components/Content.jsx";
-import AvailableLinks from "../components/AvailableLinks.jsx";
 import Checkbox from "../components/Checkbox.jsx";
+import PageContent from "../components/PageContent.jsx";
 
 function Key() {
     const {key, setKey} = useMusic();
 
     return (
-        <div className="h-full">
+        <PageContent children={
             <Content
                 title={"Set key:"}
                 children={Keys.map((keyNote) =>
@@ -24,8 +24,7 @@ function Key() {
                     />
                 )}
             />
-            <AvailableLinks />
-        </div>
+        } />
     );
 }
 

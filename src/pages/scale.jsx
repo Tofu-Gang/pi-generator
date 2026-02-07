@@ -1,13 +1,13 @@
 import { useMusic } from "../context/music.jsx";
 import Content from "../components/Content.jsx";
 import Checkbox from "../components/Checkbox.jsx";
-import AvailableLinks from "../components/AvailableLinks.jsx";
+import PageContent from "../components/PageContent.jsx";
 
 function Scale() {
     const {scales, setScale, scale} = useMusic();
 
     return (
-        <div className="h-full">
+        <PageContent children={
             <Content title={"Set scale:"} children={
                 <div className="flex flex-col">
                     {scales.value.map((scaleData) =>
@@ -24,8 +24,7 @@ function Scale() {
                     )}
                 </div>}
             />
-            <AvailableLinks/>
-        </div>
+        } />
     );
 }
 
