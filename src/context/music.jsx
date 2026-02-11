@@ -81,27 +81,27 @@ export function MusicProvider({ children }) {
 
     const Breadcrumbs = [
         {
-            display: "Set Key",
+            display: "Key",
             state: key,
             path: PiGeneratorRoutes.Key.path
         },
         {
-            display: "Set Filters",
+            display: "Filters",
             state: filters,
             path: PiGeneratorRoutes.Filters.path
         },
         {
-            display: "Set Scale",
+            display: "Scale",
             state: scale,
             path: PiGeneratorRoutes.Scale.path
         },
         {
-            display: "Set Result Length",
+            display: "Result Length",
             state: resultLength,
             path: PiGeneratorRoutes.ResultLength.path
         },
         {
-            display: "Get Result Notes",
+            display: "Result Notes",
             state: resultNotes,
             path: PiGeneratorRoutes.ResultNotes.path
         }

@@ -23,6 +23,7 @@ function AvailableLinks() {
                         />
                     )
                 }
+                {location.pathname !== "/" && <Button available={true} link={"/"} display="Reset" isReset={true}/>}
             </div>
         }/>
     );

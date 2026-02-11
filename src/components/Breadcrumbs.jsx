@@ -8,7 +8,7 @@ function Breadcrumbs() {
 
     return (
         <>
-            <div className="flex flex-wrap">
+            <div className="flex flex-nowrap">
                 {links.map((breadcrumb) =>
                     <Button
                         key={breadcrumb.display}
