@@ -4,7 +4,8 @@ import Filters from "./pages/filters.jsx";
 import Scale from "./pages/scale.jsx";
 import Length from "./pages/length.jsx";
 import Result from "./pages/result.jsx";
-import HeaderFooter from "./components/HeaderFooter.jsx";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import { Routes, Route } from "react-router";
 
 export const PiGeneratorRoutes = {
@@ -37,7 +38,7 @@ export const PiGeneratorRoutes = {
 function App() {
     return (
         <div>
-            <HeaderFooter footer={false} />
+            <Header />
             <Routes>
                 {Object.keys(PiGeneratorRoutes).map((key) =>
                     <Route
@@ -47,7 +48,7 @@ function App() {
                     />
                 )}
             </Routes>
-            <HeaderFooter footer={true} />
+            <Footer />
         </div>
     );
 }
