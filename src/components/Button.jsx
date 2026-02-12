@@ -2,14 +2,13 @@ import {Link} from "react-router";
 
 function Button({available, done, isCurrentPage, link, display, onClick, isReset}) {
     return (
-
         <Link
-            className={`${!done && !available && "pointer-events-none"}`}
+            className={`${!done && !available && "pointer-events-none"} contents`}
             to={link}
             onClick={onClick}
         >
             <button
-                className={`text-xs lg:text-base m-1 px-2 py-2 rounded-full w-fit cursor-pointer min-w-22 whitespace-nowrap
+                className={`text-xs lg:text-base m-1 p-2 rounded-full w-fit cursor-pointer min-w-23 whitespace-nowrap
                 ${isReset ? "text-black bg-red-600 border-red-600" : done ? isCurrentPage ?
                         "text-black bg-green-600" :
                         "text-green-600" :

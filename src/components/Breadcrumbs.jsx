@@ -7,20 +7,18 @@ function Breadcrumbs() {
     const location = useLocation();
 
     return (
-        <>
-            <div className="flex flex-nowrap">
-                {links.map((breadcrumb) =>
-                    <Button
-                        key={breadcrumb.display}
-                        available={breadcrumb.state.available()}
-                        done={breadcrumb.state.done()}
-                        isCurrentPage={breadcrumb.path === location.pathname}
-                        link={breadcrumb.path}
-                        display={breadcrumb.display}
-                    />
-                )}
-            </div>
-        </>
+        <div className="flex flex-nowrap overflow-auto no-scrollbar">
+            {links.map((breadcrumb) =>
+                <Button
+                    key={breadcrumb.display}
+                    available={breadcrumb.state.available()}
+                    done={breadcrumb.state.done()}
+                    isCurrentPage={breadcrumb.path === location.pathname}
+                    link={breadcrumb.path}
+                    display={breadcrumb.display}
+                />
+            )}
+        </div>
     );
 }
 
