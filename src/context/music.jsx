@@ -79,29 +79,73 @@ export function MusicProvider({ children }) {
         }
     });
 
+    function resetAll() {
+        setKey((current) => ({
+            ...current,
+            value: Defaults.key
+        }));
+        setFilters((current) => ({
+            ...current,
+            value: Defaults.filters
+        }));
+        setScales((current) => ({
+            ...current,
+            value: Defaults.scales
+        }));
+        setScale((current) => ({
+            ...current,
+            value: Defaults.scale
+        }));
+        setNotes((current) => ({
+            ...current,
+            value: Defaults.notes
+        }));
+        setResultLength((current) => ({
+            ...current,
+            value: Defaults.resultLength
+
+        }));
+        setResultNotes((current) => ({
+            ...current,
+            value: Defaults.resultNotes
+        }));
+    }
+
     const Breadcrumbs = [
         {
-            display: "Set Key",
+            display: "Home",
+            state: {
+                available() {
+                    return true;
+                },
+                done() {
+                    return true;
+                }
+            },
+            path: PiGeneratorRoutes.Home.path
+        },
+        {
+            display: "Key",
             state: key,
             path: PiGeneratorRoutes.Key.path
         },
         {
-            display: "Set Filters",
+            display: "Filters",
             state: filters,
             path: PiGeneratorRoutes.Filters.path
         },
         {
-            display: "Set Scale",
+            display: "Scale",
             state: scale,
             path: PiGeneratorRoutes.Scale.path
         },
         {
-            display: "Set Result Length",
+            display: "Result Length",
             state: resultLength,
             path: PiGeneratorRoutes.ResultLength.path
         },
         {
-            display: "Get Result Notes",
+            display: "Result Notes",
             state: resultNotes,
             path: PiGeneratorRoutes.ResultNotes.path
         }
@@ -165,7 +209,8 @@ export function MusicProvider({ children }) {
             notes, setNotes,
             resultLength, setResultLength,
             resultNotes, setResultNotes,
-            links: Breadcrumbs
+            links: Breadcrumbs,
+            resetAll
         }}
     >
         {children}

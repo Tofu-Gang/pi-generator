@@ -1,28 +1,24 @@
 import { useMusic } from "../context/music.jsx";
-import { PiGeneratorRoutes } from "../App.jsx";
-import { Link } from "react-router";
+import { useLocation } from "react-router";
+import Button from "./Button.jsx";
 
 function Breadcrumbs() {
     const {links} = useMusic();
+    const location = useLocation();
 
     return (
-        <>
-            <div className="flex flex-wrap">
-                {links.map((breadcrumb) =>
-                    <Link
-                        className={`
-                    ${breadcrumb.state.done() ? "text-green-600" : breadcrumb.state.available() ? "text-yellow-600" : "text-gray-600"} 
-                    border
-                    ${breadcrumb.state.done() ? "border-green-600" : breadcrumb.state.available() ? "border-yellow-600" : "border-gray-600"}
-                    p-3 ${!breadcrumb.state.done() && !breadcrumb.state.available() && "pointer-events-none"}`}
-                        key={breadcrumb.display}
-                        to={breadcrumb.path}
-                    >
-                        {breadcrumb.display}
-                    </Link>
-                )}
-            </div>
-        </>
+        <div className="flex flex-nowrap overflow-auto no-scrollbar">
+            {links.map((breadcrumb) =>
+                <Button
+                    key={breadcrumb.display}
+                    available={breadcrumb.state.available()}
+                    done={breadcrumb.state.done()}
+                    isCurrentPage={breadcrumb.path === location.pathname}
+                    link={breadcrumb.path}
+                    display={breadcrumb.display}
+                />
+            )}
+        </div>
     );
 }
 

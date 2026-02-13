@@ -1,31 +1,30 @@
 import { useMusic } from "../context/music.jsx";
 import { Keys } from "../lib/musicData.js"
 import Content from "../components/Content.jsx";
-import AvailableLinks from "../components/AvailableLinks.jsx";
+import Checkbox from "../components/Checkbox.jsx";
+import PageContent from "../components/PageContent.jsx";
 
 function Key() {
-    const {setKey} = useMusic();
+    const {key, setKey} = useMusic();
 
     return (
-        <div className="h-full">
+        <PageContent children={
             <Content
-                title={"Choose a key:"}
+                title={"Set key:"}
                 children={Keys.map((keyNote) =>
-                    <button
+                    <Checkbox
+                        className={"h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-green-600 checked:bg-green-600"}
                         key={keyNote}
-                        onClick={() => {
-                            setKey((current) => ({
-                                ...current,
-                                value: keyNote
-                            }));
-                        }}
-                    >
-                        {keyNote}
-                    </button>
+                        name={keyNote}
+                        checked={key.value === keyNote}
+                        onChange={() => setKey((current) => ({
+                            ...current,
+                            value: current.value === keyNote ? null : keyNote
+                        }))}
+                    />
                 )}
             />
-            <AvailableLinks />
-        </div>
+        } />
     );
 }
 

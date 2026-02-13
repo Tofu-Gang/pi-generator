@@ -16,10 +16,10 @@ function NumberSpinner({value, setValue, min, max}) {
     }
 
     return (
-        <div className="flex flex-col">
-            <button onClick={increment}>⋀</button>
-            <h1>{value}</h1>
-            <button onClick={decrement}>⋁</button>
+        <div className="flex flex-col text-xl items-center">
+            <button className="p-2 cursor-pointer text-3xl" onClick={increment}>↑</button>
+            <p className="p-2 text-3xl">{value}</p>
+            <button className="p-2 cursor-pointer text-3xl" onClick={decrement}>↓</button>
         </div>
     );
 }
