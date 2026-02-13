@@ -18,7 +18,7 @@ function Length() {
                             <Checkbox
                                 className={"h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-green-600 checked:bg-green-600"}
                                 key={resultLengthData.name}
-                                name={resultLengthData.name}
+                                name={`${resultLengthData.name} (${resultLengthData.length} notes)`}
                                 checked={resultLengthData.name === resultLength.value?.name}
                                 onChange={() => setResultLength((current) => ({
                                     ...current,

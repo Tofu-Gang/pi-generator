@@ -9,7 +9,7 @@ function Button({available, done, isCurrentPage, link, display, onClick, isReset
         >
             <button
                 className={`text-xs lg:text-base m-1 p-2 rounded-full w-fit cursor-pointer min-w-23 lg:min-w-29 whitespace-nowrap
-                ${isReset ? "text-black bg-red-600 border-red-600" : done ? isCurrentPage ?
+                ${isReset ? "text-red-600 border-red-600" : done ? isCurrentPage ?
                         "text-black bg-green-600" :
                         "text-green-600" :
                     available ?

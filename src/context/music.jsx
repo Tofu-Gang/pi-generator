@@ -79,6 +79,38 @@ export function MusicProvider({ children }) {
         }
     });
 
+    function resetAll() {
+        setKey((current) => ({
+            ...current,
+            value: Defaults.key
+        }));
+        setFilters((current) => ({
+            ...current,
+            value: Defaults.filters
+        }));
+        setScales((current) => ({
+            ...current,
+            value: Defaults.scales
+        }));
+        setScale((current) => ({
+            ...current,
+            value: Defaults.scale
+        }));
+        setNotes((current) => ({
+            ...current,
+            value: Defaults.notes
+        }));
+        setResultLength((current) => ({
+            ...current,
+            value: Defaults.resultLength
+
+        }));
+        setResultNotes((current) => ({
+            ...current,
+            value: Defaults.resultNotes
+        }));
+    }
+
     const Breadcrumbs = [
         {
             display: "Key",
@@ -165,7 +197,8 @@ export function MusicProvider({ children }) {
             notes, setNotes,
             resultLength, setResultLength,
             resultNotes, setResultNotes,
-            links: Breadcrumbs
+            links: Breadcrumbs,
+            resetAll
         }}
     >
         {children}

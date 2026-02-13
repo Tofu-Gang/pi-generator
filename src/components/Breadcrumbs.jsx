@@ -8,6 +8,7 @@ function Breadcrumbs() {
 
     return (
         <div className="flex flex-nowrap overflow-auto no-scrollbar">
+            <Button done={true} link={"/"} display="Home" />
             {links.map((breadcrumb) =>
                 <Button
                     key={breadcrumb.display}

@@ -1,15 +1,16 @@
 import { useMusic } from "../context/music.jsx";
-import { Link, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Content from "./Content.jsx";
 import Button from "./Button.jsx";
 
 function AvailableLinks() {
-    const {links} = useMusic();
+    const {links, resetAll} = useMusic();
     const location = useLocation();
 
     return (
         <Content title="Available actions:" children={
             <div className="flex flex-col">
+                {location.pathname !== "/" && <Button done={true} link={"/"} display="Home" />}
                 {links
                     .filter((link) => link.state.available() && link.path !== location.pathname)
                     .map((link) =>
@@ -23,7 +24,7 @@ function AvailableLinks() {
                         />
                     )
                 }
-                {location.pathname !== "/" && <Button available={true} link={"/"} display="Reset" isReset={true}/>}
+                {<Button available={true} link={"/"} display="Reset" isReset={true} onClick={resetAll} />}
             </div>
         }/>
     );
