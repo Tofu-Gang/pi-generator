@@ -113,6 +113,18 @@ export function MusicProvider({ children }) {
 
     const Breadcrumbs = [
         {
+            display: "Home",
+            state: {
+                available() {
+                    return true;
+                },
+                done() {
+                    return true;
+                }
+            },
+            path: PiGeneratorRoutes.Home.path
+        },
+        {
             display: "Key",
             state: key,
             path: PiGeneratorRoutes.Key.path

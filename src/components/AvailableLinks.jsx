@@ -10,7 +10,6 @@ function AvailableLinks() {
     return (
         <Content title="Available actions:" children={
             <div className="flex flex-col">
-                {location.pathname !== "/" && <Button done={true} link={"/"} display="Home" />}
                 {links
                     .filter((link) => link.state.available() && link.path !== location.pathname)
                     .map((link) =>
