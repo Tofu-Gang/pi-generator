@@ -1,7 +1,7 @@
-import { useMusic } from "../context/music.jsx";
-import Checkbox from "../components/Checkbox.jsx";
-import Content from "../components/Content.jsx";
-import PageContent from "../components/PageContent.jsx";
+import { useMusic } from "../../context/music.jsx";
+import Checkbox from "../Checkbox.jsx";
+import Content from "../Content.jsx";
+import PageContent from "../PageContent.jsx";
 
 function Filters() {
     const {filters, setFilters} = useMusic();

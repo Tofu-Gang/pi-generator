@@ -1,9 +1,9 @@
-import { useMusic } from "../context/music.jsx";
-import { ResultLengths } from "../lib/musicData.js";
-import CustomResultLengthPicker from "../components/CustomResultLengthPicker.jsx";
-import Content from "../components/Content.jsx";
-import Checkbox from "../components/Checkbox.jsx";
-import PageContent from "../components/PageContent.jsx";
+import { useMusic } from "../../context/music.jsx";
+import { ResultLengths } from "../../lib/musicData.js";
+import CustomResultLengthPicker from "../CustomResultLengthPicker.jsx";
+import Content from "../Content.jsx";
+import Checkbox from "../Checkbox.jsx";
+import PageContent from "../PageContent.jsx";
 
 function Length() {
     const {resultLength, setResultLength} = useMusic();
