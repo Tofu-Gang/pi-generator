@@ -3,6 +3,7 @@ import { getScaleNotes, getScalesFiltered } from "../lib/music.js";
 import { Tags } from "../lib/musicData.js";
 
 const MusicContext = createContext();
+
 export const Defaults = {
     key: null,
     filters: Object.values(Tags).map((name) => ({name, checked : false})),
@@ -14,161 +15,83 @@ export const Defaults = {
 }
 
 export function MusicProvider({ children }) {
-    const [key, setKey] = useState({
-        value: Defaults.key,
-        available() {
-            return true;
-        },
-        done() {
-            return !!this.value;
-        }
-    });
-
-    const [filters, setFilters] = useState({
-        value: Defaults.filters,
-        available() {
-            return true;
-        },
-        done() {
-            return this.value.some((filter) => filter.checked);
-        }
-    });
-
-    const [scales, setScales] = useState({
-        value: Defaults.scales,
-        done() {
-            return this.value.length > 0;
-        }
-    });
-
-    const [scale, setScale] = useState({
-        value: Defaults.scale,
-        available() {
-            return scales.done();
-        },
-        done() {
-            return !!this.value;
-        }
-    });
-
-    const [notes, setNotes] = useState({
-        value: Defaults.notes,
-        done() {
-            return this.value.length > 0;
-        }
-    });
-
-    const [resultLength, setResultLength] = useState({
-        value: Defaults.resultLength,
-        available() {
-            return true;
-        },
-        done() {
-            return !!this.value;
-        }
-    });
-
-    const [resultNotes, setResultNotes] = useState({
-        value: Defaults.resultNotes,
-        available() {
-            return key.done() && scale.done() && resultLength.done();
-        },
-        done() {
-            return this.value.length > 0
-        }
-    });
+    const [key, setKey] = useState(Defaults.key);
+    const [filters, setFilters] = useState(Defaults.filters);
+    const [scale, setScale] = useState(Defaults.scale);
+    const [resultLength, setResultLength] = useState(Defaults.resultLength);
+    const [resultNotes, setResultNotes] = useState(Defaults.resultNotes);
 
     function resetAll() {
-        setKey((current) => ({
-            ...current,
-            value: Defaults.key
-        }));
-        setFilters((current) => ({
-            ...current,
-            value: Defaults.filters
-        }));
-        setScales((current) => ({
-            ...current,
-            value: Defaults.scales
-        }));
-        setScale((current) => ({
-            ...current,
-            value: Defaults.scale
-        }));
-        setNotes((current) => ({
-            ...current,
-            value: Defaults.notes
-        }));
-        setResultLength((current) => ({
-            ...current,
-            value: Defaults.resultLength
-
-        }));
-        setResultNotes((current) => ({
-            ...current,
-            value: Defaults.resultNotes
-        }));
+        setKey(Defaults.key);
+        setFilters(Defaults.filters);
+        setScale(Defaults.scale);
+        setResultLength(Defaults.resultLength);
+        setResultNotes(Defaults.resultNotes);
     }
 
+    // cannot reference State inside State definition, these must be created before State definition then
+    const keyDone = !!key;
+    const scales = getScalesFiltered(filters);
+    const scalesDone = scales.length > 0;
+    const scaleDone = !!scale;
+    const notesAvailable = keyDone && scaleDone;
+    const notes = notesAvailable ? getScaleNotes(key, scale.name) : Defaults.notes;
+    const resultLengthDone = !!resultLength;
+
+    const Status = {
+        Key: {
+            available: true,
+            done: keyDone
+        },
+        Filters: {
+            available: true,
+            done: filters.some((filter) => filter.checked)
+        },
+        Scales: {
+            done: scalesDone
+        },
+        Scale: {
+            available: scalesDone,
+            done: scaleDone
+        },
+        Notes: {
+            available: keyDone && scaleDone,
+            done: notes.length > 0
+        },
+        ResultLength: {
+            available: true,
+            done: resultLengthDone
+        },
+        ResultNotes: {
+            available: keyDone && scaleDone && resultLengthDone,
+            done: resultNotes.length > 0
+        }
+    }
+
+    // update available scales based on selected filters
     useEffect(() => {
-        // update available scales based on selected filters
-        setScales((current) => ({
-            ...current,
-            value: getScalesFiltered(filters.value)
-        }));
+        if(!scales.map((scaleData) => scaleData.name).includes(scale?.name)) {
+            // clear selected scale if it is no longer available based on selected filters
+            setScale(Defaults.scale);
+        }
     }, [filters]);
 
     useEffect(() => {
-        setScale((current) => ({
-            ...current,
-            // clear selected scale if it is no longer available based on selected filters
-            ...(!scales.value.map((scaleData) => scaleData.name).includes(scale.value?.name) && {value: Defaults.scale}),
-            // referencing other states for availability flag causes the need to refresh this in an effect, otherwise
-            // stale value is returned
-            available() {
-                return scales.done();
-            }
-        }));
-    }, [scales]);
-
-    useEffect(() => {
-        setNotes((current) => ({
-            ...current,
-            // scale notes can be generated only if key and scale is already selected
-            ...(key.done() && scale.done() ?
-                {value: getScaleNotes(key.value, scale.value.name)} :
-                {value: Defaults.notes})
-        }));
-    }, [key, scale]);
-
-    useEffect(() => {
-        setResultNotes((current) => ({
-            ...current,
-            // referencing other states for availability flag causes the need to refresh this in an effect, otherwise
-            // stale value is returned
-            available() {
-                return key.done() && scale.done() && resultLength.done();
-            }
-        }));
-        if(resultNotes.done()) {
-            // generated notes depend on multiple states; clear generated notes if any of the states changes
-            setResultNotes((current) => ({
-                ...current,
-                value: Defaults.resultNotes
-            }))
-        }
+        // clear result notes if any state that result notes depend on changes
+        setResultNotes(Defaults.resultNotes);
     }, [key, scale, resultLength])
 
     return <MusicContext.Provider
         value={{
             key, setKey,
             filters, setFilters,
-            scales, setScales,
+            scales,
             scale, setScale,
-            notes, setNotes,
+            notes,
             resultLength, setResultLength,
             resultNotes, setResultNotes,
-            resetAll
+            resetAll,
+            Status
         }}
     >
         {children}

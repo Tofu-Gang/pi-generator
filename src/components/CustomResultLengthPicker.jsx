@@ -8,7 +8,7 @@ function CustomResultLengthPicker({setValue}) {
 
     useEffect(() => {
         setValue(Number(`${orderHundred}${orderTen}${orderOne}`));
-    }, [orderOne, orderTen, orderHundred]);
+    }, [orderOne, orderTen, orderHundred, setValue]);
 
     return (
         <div className="flex">

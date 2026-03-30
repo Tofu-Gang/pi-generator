@@ -1,16 +1,16 @@
 import { useMusic } from "../context/music.jsx";
 
 function Info() {
-    const {key, filters, scale, notes, resultLength, resultNotes} = useMusic();
+    const {key, scale, notes, resultLength, Status} = useMusic();
     let infoText = `
-        ${!resultNotes.done() && key.done() && !scale.done() ? `Key: ${key.value}` : ""}
-        ${!resultNotes.done() && filters.done() && !scale.done() ? "Filters chosen" : ""}
-        ${!resultNotes.done() && key.done() && scale.done() ? `Scale: ${key.value} ${scale.value.display}` : ""}
-        ${!resultNotes.done() && scale.done() && !key.done() ? `Scale: ${scale.value.display}` : ""}
-        ${!resultNotes.done() && notes.done() ? `Notes: ${notes.value.join(", ")}` : ""}
-        ${!resultNotes.done() && resultLength.done() ? `Result length: ${resultLength.value.name} (${resultLength.value.length} notes)` : ""}
-        ${resultNotes.done() ? "GO PLAY RIGHT NOW, I'M SERIOUS!" : ""}
-        ${!key.done() && !scale.done() && !resultLength.done() && !resultNotes.done() ? "Pi Generator by TofuGang SW" : ""}
+        ${!Status.ResultNotes.done && Status.Key.done && !Status.Scale.done ? `Key: ${key}` : ""}
+        ${!Status.ResultNotes.done && Status.Filters.done && !Status.Scale.done ? "Filters chosen" : ""}
+        ${!Status.ResultNotes.done && Status.Key.done && Status.Scale.done ? `Scale: ${key} ${scale.display}` : ""}
+        ${!Status.ResultNotes.done && Status.Scale.done && !Status.Key.done ? `Scale: ${scale.display}` : ""}
+        ${!Status.ResultNotes.done && Status.Notes.done ? `Notes: ${notes.join(", ")}` : ""}
+        ${!Status.ResultNotes.done && Status.ResultLength.done ? `Result length: ${resultLength.name} (${resultLength.length} notes)` : ""}
+        ${Status.ResultNotes.done ? "GO PLAY RIGHT NOW, I'M SERIOUS!" : ""}
+        ${!Status.Key.done && !Status.Scale.done && !Status.ResultLength.done && !Status.ResultNotes.done ? "Pi Generator by TofuGang SW" : ""}
     `;
 
     return (
