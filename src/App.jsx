@@ -6,7 +6,6 @@ import Scale from "./components/pages/Scale.jsx";
 import Length from "./components/pages/Length.jsx";
 import Result from "./components/pages/Result.jsx";
 import { useMusic } from "./context/music.jsx";
-// TODO: send request automatically, don't wait for the user to click the generate (FETCH) button!
 // TODO: add random button
 // User does not immediately understand what the app does, what is the meaning of all settings, risk of immediate leave!
 // Research what does header and footer contain normally and use these patterns!

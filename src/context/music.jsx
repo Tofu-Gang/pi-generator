@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { getScaleNotes, getScalesFiltered } from "../lib/music.js";
+import { getResultNotes, getScaleNotes, getScalesFiltered } from "../lib/music.js";
 import { Tags } from "../lib/musicData.js";
 
 const MusicContext = createContext();
@@ -20,14 +20,6 @@ export function MusicProvider({ children }) {
     const [scale, setScale] = useState(Defaults.scale);
     const [resultLength, setResultLength] = useState(Defaults.resultLength);
     const [resultNotes, setResultNotes] = useState(Defaults.resultNotes);
-
-    function resetAll() {
-        setKey(Defaults.key);
-        setFilters(Defaults.filters);
-        setScale(Defaults.scale);
-        setResultLength(Defaults.resultLength);
-        setResultNotes(Defaults.resultNotes);
-    }
 
     // cannot reference State inside State definition, these must be created before State definition then
     const keyDone = !!key;
@@ -77,9 +69,26 @@ export function MusicProvider({ children }) {
     }, [filters]);
 
     useEffect(() => {
-        // clear result notes if any state that result notes depend on changes
-        setResultNotes(Defaults.resultNotes);
+        if(Status.ResultNotes.available) {
+            fetchResultNotes();
+        } else {
+            // clear result notes if any state that result notes depend on changes
+            setResultNotes(Defaults.resultNotes);
+        }
     }, [key, scale, resultLength])
+
+    function resetAll() {
+        setKey(Defaults.key);
+        setFilters(Defaults.filters);
+        setScale(Defaults.scale);
+        setResultLength(Defaults.resultLength);
+        setResultNotes(Defaults.resultNotes);
+    }
+
+    async function fetchResultNotes() {
+        const resultNotes = await getResultNotes(notes, resultLength);
+        setResultNotes(resultNotes);
+    }
 
     return <MusicContext.Provider
         value={{
@@ -90,8 +99,9 @@ export function MusicProvider({ children }) {
             notes,
             resultLength, setResultLength,
             resultNotes, setResultNotes,
+            Status,
             resetAll,
-            Status
+            fetchResultNotes
         }}
     >
         {children}

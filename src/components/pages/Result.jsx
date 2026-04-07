@@ -1,16 +1,14 @@
 import { useMusic } from "../../context/music.jsx";
-import { getResultNotes } from "../../lib/music.js";
 import Content from "../Content.jsx";
 
 function Result() {
-    const {key, scale, notes, resultLength, resultNotes, setResultNotes, Status} = useMusic();
+    const {key, scale, resultLength, resultNotes, Status, fetchResultNotes} = useMusic();
 
     return (
         <>
             <Content title={"Get Result"} children={
                 <button onClick={async () => {
-                    const resultNotes = await getResultNotes(notes, resultLength);
-                    setResultNotes(resultNotes);
+                    await fetchResultNotes();
                 }}>
                     FETCH
                 </button>
